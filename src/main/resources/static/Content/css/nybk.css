@@ -1,0 +1,70 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+.content{
+    width: 95%;
+    margin: 0 auto;
+    height: 100%;
+
+}
+.content_left{
+    width: 22%;
+    height: 95%;
+    margin-left: 2%;
+
+    float: left;
+
+}
+.nybk_right {
+    height: 92%;
+    width: 70%;
+    float: right;
+    border: 1px solid #0889cd;
+    background: rgba(255,255,255,0.1);
+    margin-right: 3%;
+    margin-top: 20px;
+}
+.nybk_click{
+    width: 90%;
+    margin: 0 auto;
+    height: 120px;
+    background-color: #0b7bd1;
+    margin-top: 20px;
+    border-radius: 5px;
+    position: relative;
+}
+.nybk_click_text{
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: white;
+    border-radius:5px 5px 0 0 ;
+}
+.nybk_click_title{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 0 0 5px 5px ;
+    color: white;
+
+}
+.three{
+    width: 0px;
+    height: 0px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: rgba(255,255,255,0) rgba(255,255,255,0)   rgba(255,255,255,0)  #0b7bd1;
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    margin-top: -20px;
+    display: none;
+}

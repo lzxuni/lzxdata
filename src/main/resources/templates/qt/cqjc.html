@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>互联网+农业云</title>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/common_click.js"></script>
+    <script src="js/echarts.min.js"></script>
+
+    <link rel="stylesheet" href="css/cqjc.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="lib/time_select/time.css">
+    <script src="lib/time_select/jquery_002.js"></script>
+    <script src="lib/time_select/jquery_003.js"></script>
+
+    <link rel="stylesheet" href="lib/jqueryPagination/css/jquery.pagination.css" />
+    <link rel="stylesheet" href="css/fenye.css">
+    <script src="js/fenye.js"></script>
+
+    <script src="lib/jqueryPagination/js/jquery.pagination.min.js"></script>
+
+
+
+</head>
+<body>
+<div class="top_all">
+    <p class="top_title">互联网+农业云</p>
+    <div class="top_user">
+        <div class="user_user">
+            <div class="top_user_img">
+                <img src="images/icon.png" alt="">
+
+            </div>
+            <p class="top_user_name">你好！管理员</p>
+        </div>
+
+    </div>
+
+
+    <div class="top_out">
+        <div class="out_out">
+            <div class="top_out_img">
+                <img src="images/icon.png" alt="">
+
+            </div>
+            <p class="top_out_name">退出</p>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<!--图表-->
+<div  class="content_all">
+    <div class="content">
+        <div class="cqjc_left">
+            <div class="cqjc_txt">
+                <script>
+                    $(function(){
+
+                        $('.date_picker').date_input();
+
+                    })
+
+
+                </script>
+                <span>虫情检测</span>
+                <!--时间搜索插件-->
+                <div class="cqjc_ss">
+                    <img src="images/search.png">
+                </div>
+                <div style=" width:240px;;float: right;border: 1px solid #1c7dfa;">
+                    <input style="text-align: center;letter-spacing: 2px;width: 226px;background: none;border: none;font-size: 14px;color: white;border-radius: 3px;height: 40px;" class="date_picker" value="2018-6-15" type="text"><div class="date_selector" style="display: none; top: 105.05px; left: 710px;"><div class="nav"><p class="month_nav"><span class="button prev" title="[Page-Up]">«</span> <span class="month_name">六月份</span> <span class="button next" title="[Page-Down]">»</span></p><p class="year_nav"><span class="button prev" title="[Ctrl+Page-Up]">«</span> <span class="year_name">2018</span> <span class="button next" title="[Ctrl+Page-Down]">»</span></p></div><table><thead><tr><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr></thead><tbody><tr><td class="unselected_month" date="2018-5-28">28</td><td class="unselected_month" date="2018-5-29">29</td><td class="unselected_month" date="2018-5-30">30</td><td class="unselected_month" date="2018-5-31">31</td><td class="selectable_day" date="2018-6-1">1</td><td class="selectable_day" date="2018-6-2">2</td><td class="selectable_day" date="2018-6-3">3</td></tr><tr><td class="selectable_day" date="2018-6-4">4</td><td class="selectable_day" date="2018-6-5">5</td><td class="selectable_day" date="2018-6-6">6</td><td class="selectable_day" date="2018-6-7">7</td><td class="selectable_day" date="2018-6-8">8</td><td class="selectable_day" date="2018-6-9">9</td><td class="selectable_day" date="2018-6-10">10</td></tr><tr><td class="selectable_day" date="2018-6-11">11</td><td class="selectable_day" date="2018-6-12">12</td><td class="selectable_day today selected" date="2018-6-13">13</td><td class="selectable_day" date="2018-6-14">14</td><td class="selectable_day" date="2018-6-15">15</td><td class="selectable_day" date="2018-6-16">16</td><td class="selectable_day" date="2018-6-17">17</td></tr><tr><td class="selectable_day" date="2018-6-18">18</td><td class="selectable_day" date="2018-6-19">19</td><td class="selectable_day" date="2018-6-20">20</td><td class="selectable_day" date="2018-6-21">21</td><td class="selectable_day" date="2018-6-22">22</td><td class="selectable_day" date="2018-6-23">23</td><td class="selectable_day" date="2018-6-24">24</td></tr><tr><td class="selectable_day" date="2018-6-25">25</td><td class="selectable_day" date="2018-6-26">26</td><td class="selectable_day" date="2018-6-27">27</td><td class="selectable_day" date="2018-6-28">28</td><td class="selectable_day" date="2018-6-29">29</td><td class="selectable_day" date="2018-6-30">30</td><td class="unselected_month" date="2018-7-1">1</td></tr></tbody></table></div>
+
+                </div>
+
+
+            </div>
+            <div class="cqjc_table_all">
+                <table style="border-collapse:collapse;">
+                    <tr>
+                        <th>序号</th>
+                        <th>采集位置</th>
+                        <th>虫名</th>
+                        <th>数量(头)</th>
+                        <th>虫口密度(头/亩)</th>
+                        <th>观测员</th>
+                        <th>观测时间</th>
+                        <th>照片</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>东北侧农田G20地块</td>
+                        <td>蝗虫</td>
+                        <td>500000</td>
+                        <td>50000</td>
+                        <td>李晓红</td>
+                        <td>2017-06-04</td>
+                        <td>
+                            <a href="#"><span class="table_button">查看</span></a>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="content_fy">
+
+
+
+                    <div class="box">
+                        <div id="pagination3" class="page fl"></div>
+                        <div class="info fl">
+                            <!--<p>当前页数：<span id="current3">4</span></p>-->
+                        </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="cqjc_right">
+            <div id="main" class="cqjc_right_one">
+                <script type="text/javascript">
+                    if (screen.width>1601)
+                        document.write('<script type="text/javascript" src="js/cqjc_echarts_1920.js"><\/script>');
+                    if (screen.width<1601){
+                        document.write('<script type="text/javascript" src="js/cqjc_echarts_1440.js"><\/script>');
+                    }
+                </script>
+
+            </div>
+            <div id="main2" class="cqjc_right_two">
+                <script type="text/javascript">
+                    if (screen.width>1601)
+                        document.write('<script type="text/javascript" src="js/cqjc_echarts_1920.js"><\/script>');
+                    if (screen.width<1601){
+                        document.write('<script type="text/javascript" src="js/cqjc_echarts_1440.js"><\/script>');
+                    }
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="footer_all"></div>
+
+
+</body>
+</html>
+
+
+
+
