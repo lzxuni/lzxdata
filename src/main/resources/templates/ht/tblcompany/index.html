@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico">
 
-    <title>商品管理</title>
+    <title>企业管理</title>
     <link href="Content/pace/pace-theme-minimal.css" rel="stylesheet" />
     <link href="Content/font/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -1404,7 +1404,7 @@
                 a("#btn_Search").on("click", function() {
                     var d = a("#txt_Keyword").val();
                     c.search({
-                        cname: d
+                        keyword: d
                     })
                 });
                 a("#lr_refresh").on("click", function() {
@@ -1414,8 +1414,8 @@
                     selectedRow = null;
                     b.layerForm({
                         id: "form",
-                        title: "添加角色",
-                        url: top.$.rootUrl + "${request.contextPath}/admin/ht/commodity/insert_v.html",
+                        title: "添加企业",
+                        url: top.$.rootUrl + "${request.contextPath}/admin/ht/tblCompany/insert_v.html",
                         width: 600,
                         height: 440,
                         callBack: function(d) {
@@ -1429,8 +1429,8 @@
                     if (b.checkrow(d)) {
                         b.layerForm({
                             id: "form",
-                            title: "编辑角色",
-                            url: top.$.rootUrl + "${request.contextPath}/admin/ht/commodity/insert_v.html",
+                            title: "编辑企业",
+                            url: top.$.rootUrl + "${request.contextPath}/admin/ht/tblCompany/insert_v.html",
                             width: 600,
                             height: 440,
                             callBack: function(e) {
@@ -1444,7 +1444,7 @@
                     if (b.checkrow(d)) {
                         b.layerConfirm("是否确认删除该项！", function(e) {
                             if (e) {
-                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/admin/ht/commodity/delete_o.html", {
+                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/admin/ht/tblCompany/delete_o.html", {
                                     keyValue: d
                                 }, function() {
                                     refreshGirdData()
@@ -1545,35 +1545,35 @@
             },
             initGird: function() {
                 a("#girdtable").jfGrid({
-                    url: top.$.rootUrl + "${request.contextPath}/admin/ht/commodity/index_o.html",
+                    url: top.$.rootUrl + "${request.contextPath}/admin/ht/tblCompany/index_o.html",
                     headData: [{
-                        label: "商品名称",
-                        name: "cname",
+                        label: "企业名称",
+                        name: "coname",
                         width: 200,
                         align: "left"
                     }, {
-                        label: "规格",
-                        name: "cspecifications",
+                        label: "负责人",
+                        name: "cobody",
                         width: 130,
                         align: "center"
                     },{
-                        label: "价格",
-                        name: "cprice",
+                        label: "联系电话",
+                        name: "cophone",
                         width: 130,
                         align: "center"
                     }, {
-                        label: "产品批号",
-                        name: "cbatchnumber",
+                        label: "地址",
+                        name: "coaddress",
                         width: 130,
                         align: "center"
                     }, {
-                        label: "保质期",
-                        name: "cperiod",
+                        label: "地块位置",
+                        name: "coposition",
                         width: 130,
                         align: "center"
                     },{
-                        label: "认证类别",
-                        name: "ccategory",
+                        label: "公司简介",
+                        name: "cointroduction",
                         width: 130,
                         align: "center"
                     }
