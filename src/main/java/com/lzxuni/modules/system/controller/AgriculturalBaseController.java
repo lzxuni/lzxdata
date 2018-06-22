@@ -36,12 +36,10 @@ public class AgriculturalBaseController extends BaseController {
     // 列表
     @RequestMapping("/list.html")
     public Object index_o(String pagination,
-                          String queryJson) throws Exception {
+                          String type) throws Exception {
         PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
-        PlantArea plantAreas = JSON.parseObject(queryJson, PlantArea.class);
-        if (plantAreas == null) {
-            plantAreas = new PlantArea();
-        }
+        PlantArea plantAreas = new PlantArea();
+        plantAreas.setType(type);
         PageData pageData = getPageData(plantAreaService.queryPage(pageParameter, plantAreas));
         return R.ok(pageData);
     }
@@ -70,10 +68,11 @@ public class AgriculturalBaseController extends BaseController {
             return R.ok("修改成功");
         }
     }
+
     //删除
     @RequestMapping("/deleteAreaDo.html")
-    public Object deleteDo(@RequestParam("keyValue")String[] roleIds){
+    public Object deleteDo(@RequestParam("keyValue") String[] roleIds) {
         plantAreaService.deleteBatchIds(Arrays.asList(roleIds));
-        return  R.ok("删除成功");
+        return R.ok("删除成功");
     }
 }
