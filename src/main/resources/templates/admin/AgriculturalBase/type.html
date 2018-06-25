@@ -1407,7 +1407,7 @@
                     b.layerForm({
                         id: "form",
                         title: "添加角色",
-                        url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/addArea.html",
+                        url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/addType.html",
                         width: 500,
                         height: 340,
                         callBack: function (d) {
@@ -1422,7 +1422,7 @@
                         b.layerForm({
                             id: "form",
                             title: "编辑作物",
-                            url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/addArea.html",
+                            url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/addType.html",
                             width: 500,
                             height: 340,
                             callBack: function (e) {
@@ -1436,7 +1436,7 @@
                     if (b.checkrow(d)) {
                         b.layerConfirm("是否确认删除该项！", function (e) {
                             if (e) {
-                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/agriculturalbase/deleteAreaDo.html", {
+                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/agriculturalbase/deleteTypeDo.html", {
                                     keyValue: d
                                 }, function () {
                                     refreshGirdData()
@@ -1491,7 +1491,7 @@
             },
             initGird: function () {
                 a("#girdtable").jfGrid({
-                    url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/listArea.html",
+                    url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/listType.html",
                     headData: [{
                         label: "id",
                         name: "id",
