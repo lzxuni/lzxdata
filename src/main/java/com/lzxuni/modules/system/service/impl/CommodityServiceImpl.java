@@ -38,7 +38,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     public PageInfo<Commodity> queryPage(PageParameter pageParameter, Commodity demo) {
         PageHelper.startPage(pageParameter.getPage(), pageParameter.getRows()).setOrderBy(
                 pageParameter.getSidx() + " " + pageParameter.getSord());
-        List<Commodity> roleList = commodityMapper.selectList(new EntityWrapper<Commodity>());
+        List<Commodity> roleList = commodityMapper.selectList(new EntityWrapper<Commodity>(demo));
         PageInfo<Commodity> pageInfo = new PageInfo<>(roleList);
         return pageInfo;
     }

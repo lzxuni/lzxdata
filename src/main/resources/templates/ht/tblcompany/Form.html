@@ -1621,42 +1621,30 @@
 
 <div class="lr-form-wrap" id="form">
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">商品名称<font face="宋体">*</font></div>
-        <input id="cname" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">企业名称<font face="宋体">*</font></div>
+        <input id="coname" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">规格<font face="宋体">*</font></div>
-        <input id="cspecifications" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">负责人<font face="宋体">*</font></div>
+        <input id="cobody" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">价格<font face="宋体">*</font></div>
-        <input id="cprice" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">联系电话<font face="宋体">*</font></div>
+        <input id="cophone" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">产品批号<font face="宋体">*</font></div>
-        <input id="cbatchnumber" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">地址<font face="宋体">*</font></div>
+        <input id="coaddress" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">保质期<font face="宋体">*</font></div>
-        <input id="cperiod" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">地块位置</div>
+        <input id="coposition" type="text" class="form-control" />
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">认证类别<font face="宋体">*</font></div>
-        <input id="ccategory" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
-    </div>
-    <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">生产企业</div>
-        <div id="enterpriseid"></div>
+        <div class="lr-form-item-title">公司简介<font face="宋体">*</font></div>
+        <textarea id="cointroduction" type="text" class="form-control" style="height:80px;"></textarea>
     </div>
 
-    <!--<div class="col-xs-12 lr-form-item">-->
-        <!--<div class="checkbox">-->
-            <!--<label>-->
-                <!--<input id="flag" type="checkbox" checked="checked">-->
-                <!--有效-->
-            <!--</label>-->
-        <!--</div>-->
-    <!--</div>-->
 </div>
 <script>
     var acceptClick;
@@ -1675,12 +1663,6 @@
             init: function () {
                 c.initData()
             },
-            bind: function() {
-                a("#enterpriseid").lrDepartmentSelect({
-                    companyId: "",
-                    maxHeight: 180
-                })
-            },
             initData: function () {
                 if (!!d) {
                     keyValue = d.id;
@@ -1693,7 +1675,7 @@
                 return false
             }
             var f = a("#form").lrGetFormData(keyValue);
-            a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/admin/ht/commodity/insert_o.html?id=" + keyValue, f, function (g) {
+            a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/admin/ht/tblCompany/insert_o.html?id=" + keyValue, f, function (g) {
                 if (!!e) {
                     e()
                 }
@@ -2101,8 +2083,7 @@
                 type: "tree",
                 maxHeight: 200,
                 allowSearch: true,
-                url: top.$.rootUrl +
-                "${request.contextPath}/admin/ht/tblCompany/GetTree.html",
+                url: top.$.rootUrl + "/LR_OrganizationModule/Company/GetTree",
                 param: {
                     parentId: "0"
                 },
@@ -2163,7 +2144,7 @@
                 type: "tree",
                 maxHeight: 200,
                 allowSearch: true,
-                url: top.$.rootUrl + "${request.contextPath}/admin/ht/tblCompany/GetTree.html",
+                url: top.$.rootUrl + "/LR_OrganizationModule/Department/GetTree",
                 param: {
                     companyId: "",
                     parentId: "0"
