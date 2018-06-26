@@ -14,7 +14,7 @@ import java.util.Date;
  */
 
 
-@TableName("tbl_company")
+@TableName("tbl_zlzs_company")
 public class TblCompany implements Serializable {
 
     private	String	id	;	//

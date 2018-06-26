@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @version 1.0 <br>
  */
-@TableName("tbl_commodity")
+@TableName("tbl_zlzs_commodity")
 public class Commodity implements Serializable {
 
 
