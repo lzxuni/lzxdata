@@ -33,6 +33,7 @@ public class PlantAreaServiceImpl extends ServiceImpl<PlantAreaMapper, PlantArea
     public PageInfo<PlantArea> queryPage(PageParameter pageParameter, PlantArea plantArea) {
         PageHelper.startPage(pageParameter.getPage(), pageParameter.getRows()).setOrderBy(
                 pageParameter.getSidx() + " " + pageParameter.getSord());
+        plantArea.setValue(plantArea.getType());
         List<PlantArea> plantAreaList = plantAreaMapper.selectList(new EntityWrapper<PlantArea>(plantArea));
         PageInfo<PlantArea> pageInfo = new PageInfo<>(plantAreaList);
         return pageInfo;

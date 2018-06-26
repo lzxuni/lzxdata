@@ -7,8 +7,10 @@ import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
+import com.lzxuni.modules.system.entity.GrainSales;
 import com.lzxuni.modules.system.entity.PlantArea;
 import com.lzxuni.modules.system.entity.PlantType;
+import com.lzxuni.modules.system.service.agriculturalBase.GrainSalesService;
 import com.lzxuni.modules.system.service.agriculturalBase.PlantAreaService;
 import com.lzxuni.modules.system.service.agriculturalBase.PlantTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class AgriculturalBaseController extends BaseController {
     PlantAreaService plantAreaService;
     @Autowired
     PlantTypeService plantTypeService;
+    @Autowired
+    GrainSalesService grainSalesService;
 
     @RequestMapping("/area.html")
     public ModelAndView area() {
@@ -43,7 +47,6 @@ public class AgriculturalBaseController extends BaseController {
                           String type) throws Exception {
         PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
         PlantArea plantAreas = new PlantArea();
-        plantAreas.setType(type);
         PageData pageData = getPageData(plantAreaService.queryPage(pageParameter, plantAreas));
         return R.ok(pageData);
     }
@@ -114,6 +117,49 @@ public class AgriculturalBaseController extends BaseController {
     @RequestMapping("/deleteTypeDo.html")
     public Object deleteTypeDo(@RequestParam("keyValue") String[] roleIds) {
         plantTypeService.deleteBatchIds(Arrays.asList(roleIds));
+        return R.ok("删除成功");
+    }
+
+    @RequestMapping("/GrainSales.html")
+    public ModelAndView GrainSales() {
+        ModelAndView mv = new ModelAndView("/admin/AgriculturalBase/GrainSales");
+        return mv;
+    }
+
+    // 列表
+    @RequestMapping("/listGrainSales.html")
+    public Object listGrainSales(String pagination,
+                                 String type) throws Exception {
+        PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
+        GrainSales grainSales = new GrainSales();
+        grainSales.setType(type);
+        PageData pageData = getPageData(grainSalesService.queryPage(pageParameter, grainSales));
+        return R.ok(pageData);
+    }
+
+    @RequestMapping("/addGrainSales.html")
+    public ModelAndView addGrainSales() {
+        ModelAndView mv = new ModelAndView("/admin/AgriculturalBase/formGrainSales");
+        return mv;
+    }
+
+    @RequestMapping("/addGrainSalesDo.html")
+    public Object addGrainSalesDo(GrainSales grainSales) {
+        if (StringUtils.isEmpty(grainSales.getId())) {
+            grainSales.setId(UuidUtil.get32UUID());
+            grainSales.setCreatetime(new Date());
+            grainSalesService.insert(grainSales);
+            return R.ok("新增成功");
+        } else {
+            grainSalesService.updateById(grainSales);
+            return R.ok("修改成功");
+        }
+    }
+
+    //删除
+    @RequestMapping("/deleteGrainSalesDo.html")
+    public Object deleteGrainSalesDo(@RequestParam("keyValue") String[] roleIds) {
+        grainSalesService.deleteBatchIds(Arrays.asList(roleIds));
         return R.ok("删除成功");
     }
 }
