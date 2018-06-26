@@ -11,6 +11,7 @@ import com.lzxuni.modules.system.entity.GrainSales;
 import com.lzxuni.modules.system.entity.PlantArea;
 import com.lzxuni.modules.system.entity.PlantType;
 import com.lzxuni.modules.system.service.agriculturalBase.GrainSalesService;
+import com.lzxuni.modules.system.service.agriculturalBase.GrainYieldService;
 import com.lzxuni.modules.system.service.agriculturalBase.PlantAreaService;
 import com.lzxuni.modules.system.service.agriculturalBase.PlantTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class AgriculturalBaseController extends BaseController {
     PlantTypeService plantTypeService;
     @Autowired
     GrainSalesService grainSalesService;
+    @Autowired
+    GrainYieldService grainYieldService;
 
     @RequestMapping("/area.html")
     public ModelAndView area() {
@@ -160,6 +163,50 @@ public class AgriculturalBaseController extends BaseController {
     @RequestMapping("/deleteGrainSalesDo.html")
     public Object deleteGrainSalesDo(@RequestParam("keyValue") String[] roleIds) {
         grainSalesService.deleteBatchIds(Arrays.asList(roleIds));
+        return R.ok("删除成功");
+    }
+
+
+    @RequestMapping("/GrainYield.html")
+    public ModelAndView GrainYield() {
+        ModelAndView mv = new ModelAndView("/admin/AgriculturalBase/GrainYield");
+        return mv;
+    }
+
+    // 列表
+    @RequestMapping("/listGrainYield.html")
+    public Object listGrainYield(String pagination,
+                                 String type) throws Exception {
+        PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
+        GrainYield grainYield = new GrainYield();
+        grainYield.setType(type);
+        PageData pageData = getPageData(grainYieldService.queryPage(pageParameter, grainYield));
+        return R.ok(pageData);
+    }
+
+    @RequestMapping("/addGrainYield.html")
+    public ModelAndView addGrainYield() {
+        ModelAndView mv = new ModelAndView("/admin/AgriculturalBase/formGrainYield");
+        return mv;
+    }
+
+    @RequestMapping("/addGrainYieldDo.html")
+    public Object addGrainYieldDo(GrainYield grainYield) {
+        if (StringUtils.isEmpty(grainYield.getId())) {
+            grainYield.setId(UuidUtil.get32UUID());
+            grainYield.setCreatetime(new Date());
+            grainYieldService.insert(grainYield);
+            return R.ok("新增成功");
+        } else {
+            grainYieldService.updateById(grainYield);
+            return R.ok("修改成功");
+        }
+    }
+
+    //删除
+    @RequestMapping("/deleteGrainYieldDo.html")
+    public Object deleteGrainYieldDo(@RequestParam("keyValue") String[] roleIds) {
+        grainYieldService.deleteBatchIds(Arrays.asList(roleIds));
         return R.ok("删除成功");
     }
 }
