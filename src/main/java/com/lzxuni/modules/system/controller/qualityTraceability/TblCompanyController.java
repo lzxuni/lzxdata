@@ -87,6 +87,8 @@ public class TblCompanyController extends BaseController {
     public Object queryListByParentId(String parentId) throws Exception {
         System.out.println("12312312312312312344444");
         List<TblCompany> tblcompanyList = tblCompanyService.queryList(new TblCompany());
-        return R.ok(tblcompanyList);
+        //System.out.println(R.ok(tblcompanyList));
+       return R.ok(tblcompanyList);
+        //return tblcompanyList;
     }
 }
