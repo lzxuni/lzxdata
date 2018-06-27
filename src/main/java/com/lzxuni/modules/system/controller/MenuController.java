@@ -44,6 +44,7 @@ public class MenuController extends BaseController {
 //        return R.ok(menuService.queryListByParentId(parentId));
         Menu menu = new Menu();
         menu.setParentId(parentId);
+
         List<Menu> menuList;
         if(StringUtils.isEmpty(keyword)){
            menuList = menuService.selectList(new EntityWrapper<Menu>().eq("parent_Id", menu.getParentId()));
@@ -58,6 +59,7 @@ public class MenuController extends BaseController {
     //获取树形结构菜单
     @RequestMapping("/GetTree")
     public Object queryListByParentId(String parentId) throws Exception {
+
         List<Menu> menuList = menuService.getTree(parentId);
         return R.ok(menuList);
     }
