@@ -50,6 +50,7 @@ public class AgriculturalBaseController extends BaseController {
                           String type) throws Exception {
         PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
         PlantArea plantAreas = new PlantArea();
+        plantAreas.setType(type);
         PageData pageData = getPageData(plantAreaService.queryPage(pageParameter, plantAreas));
         return R.ok(pageData);
     }
@@ -206,6 +207,7 @@ public class AgriculturalBaseController extends BaseController {
     //删除
     @RequestMapping("/deleteGrainYieldDo.html")
     public Object deleteGrainYieldDo(@RequestParam("keyValue") String[] roleIds) {
+        System.out.println(roleIds);
         grainYieldService.deleteBatchIds(Arrays.asList(roleIds));
         return R.ok("删除成功");
     }

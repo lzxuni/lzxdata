@@ -1407,9 +1407,9 @@
                     b.layerForm({
                         id: "form",
                         title: "添加角色",
-                        url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/addArea.html",
+                        url: top.$.rootUrl + "${request.contextPath}/PrecisionFarming/addPrecisionFarming.html",
                         width: 500,
-                        height: 340,
+                        height: 460,
                         callBack: function (d) {
                             return top[d].acceptClick(refreshGirdData)
                         }
@@ -1422,7 +1422,7 @@
                         b.layerForm({
                             id: "form",
                             title: "编辑作物",
-                            url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/addArea.html",
+                            url: top.$.rootUrl + "${request.contextPath}/PrecisionFarming/addPrecisionFarming.html",
                             width: 500,
                             height: 340,
                             callBack: function (e) {
@@ -1432,14 +1432,11 @@
                     }
                 });
                 a("#lr_delete").on("click", function () {
-                    var d = "";
-                    $.each($('input:checkbox:checked'), function () {
-                        d = d + $(this).val()+",";
-                    });
+                    var d = a("#girdtable").jfGridValue("id");
                     if (b.checkrow(d)) {
                         b.layerConfirm("是否确认删除该项！", function (e) {
                             if (e) {
-                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/agriculturalbase/deleteAreaDo.html", {
+                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/PrecisionFarming/deletePrecisionFarmingDo.html", {
                                     keyValue: d
                                 }, function () {
                                     refreshGirdData()
@@ -1494,24 +1491,61 @@
             },
             initGird: function () {
                 a("#girdtable").jfGrid({
-                    url: top.$.rootUrl + "${request.contextPath}/agriculturalbase/listArea.html",
+                    url: top.$.rootUrl + "${request.contextPath}/PrecisionFarming/listPrecisionFarming.html",
                     headData: [{
                         label: "id",
                         name: "id",
-                        width: 250,
-                        align: "left",
-                        formatter: function (e, f) {
-                            return '<input name="checkrow" type="checkbox" value="' + e + '">' + e;
-                        }
+                        width: 200,
+                        align: "left"
                     }, {
-                        label: "作物类型",
-                        name: "type",
-                        width: 130,
+                        label: "风向",
+                        name: "winddirection",
+                        width: 80,
+                        align: "center"
+                    },{
+                        label: "风速",
+                        name: "windspeed",
+                        width: 80,
                         align: "center"
                     }, {
-                        label: "种植面积",
-                        name: "value",
-                        width: 130,
+                        label: "雨量",
+                        name: "rainfall",
+                        width: 80,
+                        align: "center"
+                    }, {
+                        label: "空气温度",
+                        name: "airtemperature",
+                        width: 80,
+                        align: "center"
+                    }, {
+                        label: "空气湿度",
+                        name: "airhumidity",
+                        width: 80,
+                        align: "center"
+                    }, {
+                        label: "土壤温度",
+                        name: "soiltemperature",
+                        width: 80,
+                        align: "center"
+                    }, {
+                        label: "土壤湿度",
+                        name: "soilmoisture",
+                        width: 80,
+                        align: "center"
+                    }, {
+                        label: "光照度",
+                        name: "lightintensity",
+                        width: 80,
+                        align: "center"
+                    }, {
+                        label: "CO2含量",
+                        name: "co2concentration",
+                        width: 80,
+                        align: "center"
+                    },  {
+                        label: "时间",
+                        name: "time",
+                        width: 120,
                         align: "center"
                     }],
                     isPage: true,

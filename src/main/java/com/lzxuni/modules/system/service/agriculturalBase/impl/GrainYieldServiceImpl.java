@@ -26,7 +26,7 @@ import java.util.List;
  * @author 孙志强
  * @since 2018-06-11
  */
-@Service("g rainYieldService")
+@Service("grainYieldService")
 public class GrainYieldServiceImpl extends ServiceImpl<GrainYieldMapper, GrainYield> implements GrainYieldService {
     @Autowired
     GrainYieldMapper grainYieldMapper;
