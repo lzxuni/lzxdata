@@ -7,35 +7,38 @@ import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
-import com.lzxuni.modules.system.entity.*;
-import com.lzxuni.modules.system.service.*;
+import com.lzxuni.modules.system.entity.Commodity;
+import com.lzxuni.modules.system.entity.Machining;
+import com.lzxuni.modules.system.service.CommodityService;
+import com.lzxuni.modules.system.service.MachiningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Date;
 
 /**
- * CommodityController
+ * MachiningController
  *
  * @author gyl
  * @version 1.0
- * @createTime 2018-06-21
+ * @createTime 2018-06-26
  * @description 
  **/
 @RestController
-@RequestMapping("/admin/ht/commodity")
-public class CommodityController extends BaseController {
+@RequestMapping("/admin/ht/machining")
+public class MachiningController extends BaseController {
 
     @Autowired
-    private CommodityService commodityService;
+    private MachiningService machiningService;
 
     // 列表
     @RequestMapping("/index_v.html")
     public ModelAndView list() {
-        ModelAndView mv = new ModelAndView("/ht/commodity/index");
+        ModelAndView mv = new ModelAndView("/ht/machining/index");
         return mv;
     }
     // 列表
@@ -47,35 +50,35 @@ public class CommodityController extends BaseController {
 //        if (demo == null) {
 //            demo = new Commodity();
 //        }
-        Commodity demo=new Commodity();
-        demo.setCname(cname);
-        PageData pageData = getPageData(commodityService.queryPage(pageParameter, demo));
+        Machining demo=new Machining();
+        demo.setCommodityid(cname);
+        PageData pageData = getPageData(machiningService.queryPage(pageParameter, demo));
         return R.ok(pageData);
     }
     // 新增,修改
     @RequestMapping("/insert_v.html")
     public ModelAndView insert() throws Exception{
-        ModelAndView mv = new ModelAndView("/ht/commodity/Form");
+        ModelAndView mv = new ModelAndView("/ht/machining/Form");
         return mv;
     }
     // 新增,修改 处理
     @RequestMapping("/insert_o.html")
-    public Object insertDo(Commodity demo) throws Exception {
+    public Object insertDo(Machining demo) throws Exception {
 
         if(StringUtils.isEmpty(demo.getId())){
             demo.setId(UuidUtil.get32UUID());
             demo.setCreatetime(new Date());
-            commodityService.insert(demo);
+            machiningService.insert(demo);
             return R.ok("新增成功");
         }else{
-            commodityService.updateById(demo);
+            machiningService.updateById(demo);
             return R.ok("修改成功");
         }
     }
     //删除
     @RequestMapping("/delete_o.html")
     public Object delete(@RequestParam("keyValue")String[] roleIds){
-        commodityService.deleteBatchIds(Arrays.asList(roleIds));
+        machiningService.deleteBatchIds(Arrays.asList(roleIds));
         return  R.ok("删除成功");
     }
 

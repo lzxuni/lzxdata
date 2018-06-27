@@ -1635,33 +1635,46 @@
 
 <div class="lr-form-wrap" id="form">
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">商品名称<font face="宋体">*</font></div>
-        <input id="cname" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">加工批次<font face="宋体">*</font></div>
+        <input id="jgbatch" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">规格<font face="宋体">*</font></div>
-        <input id="cspecifications" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">加工时间<font face="宋体">*</font></div>
+        <input id="jgtime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">价格<font face="宋体">*</font></div>
-        <input id="cprice" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">加工量<font face="宋体">*</font></div>
+        <input id="machiningno" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">产品批号<font face="宋体">*</font></div>
-        <input id="cbatchnumber" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">负责人<font face="宋体">*</font></div>
+        <input id="people" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">保质期<font face="宋体">*</font></div>
-        <input id="cperiod" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">生产批次<font face="宋体">*</font></div>
+        <input id="scbatch" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">认证类别<font face="宋体">*</font></div>
-        <input id="ccategory" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">检验时间<font face="宋体">*</font></div>
+        <input id="jytime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">生产企业</div>
+        <div class="lr-form-item-title">检查项目<font face="宋体">*</font></div>
+        <input id="inspectxm" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+    </div>
+    <div class="col-xs-12 lr-form-item">
+        <div class="lr-form-item-title">检查数量<font face="宋体">*</font></div>
+        <input id="inspectno" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+    </div>
+    <div class="col-xs-12 lr-form-item">
+        <div class="lr-form-item-title">检查结果<font face="宋体">*</font></div>
+        <input id="inspectjg" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+    </div>
+
+    <div class="col-xs-12 lr-form-item">
+        <div class="lr-form-item-title">商品</div>
         <div>
-            <select name="enterpriseid" id="enterpriseid"  class="lr-select select_none">
+            <select name="commodityid" id="commodityid"  class="lr-select select_none">
 
             </select>
         </div>
@@ -1674,8 +1687,8 @@
         // elem_li.innerHTML = "4"; // 设置元素的内容
         // document.getElementById('enterpriseid').appendChild(elem_li); // 添加到UL中去
 
-        var enterpriseid = $("select[name=enterpriseid]").val();
-        $("select[name=enterpriseid]").empty();      //清空
+        var enterpriseid = $("select[name=commodityid]").val();
+        $("select[name=commodityid]").empty();      //清空
         //var _LastModelId="1e82c79c303e46b0ac5abafeca8084e8";
         $.ajax({
             url:'${request.contextPath}/admin/ht/tblCompany/GetTree.html',
@@ -1697,7 +1710,7 @@
 //                            _LastModelId=null;
 //                        }
                         option += ">"+modelList[i].coname+"</option>";  //动态添加数据
-                        $("select[name=enterpriseid]").append(option);
+                        $("select[name=commodityid]").append(option);
                     }
                 }
             }
@@ -1740,7 +1753,7 @@
                 return false
             }
             var f = a("#form").lrGetFormData(keyValue);
-            a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/admin/ht/commodity/insert_o.html?id=" + keyValue, f, function (g) {
+            a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/admin/ht/machining/insert_o.html?id=" + keyValue, f, function (g) {
                 if (!!e) {
                     e()
                 }
