@@ -14,6 +14,9 @@
     <link href="Content/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="Content/jquery/plugin/scrollbar/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
 
+    <link href="Content/datepicker/skin/WdatePicker.css" rel="stylesheet"/>
+    <script src="Content/datepicker/calendar.js"></script>
+    <script src="Content/datepicker/lang/zh-cn.js"></script>
 
     <style>
         html {
@@ -1594,11 +1597,13 @@
         padding: 4px 12px;
         margin-left: 5px
     }</style>
-    <script src="Content/jquery/jquery-1.10.2.min.js"></script>
+    <script src="${request.contextPath}/Content/jquery/jquery-1.10.2.min.js"></script>
     <script src="Content/jquery/jquery.md5.min.js"></script>
     <script src="Content/jquery/plugin/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="Content/jquery/plugin/jqprint/jquery.jqprint-0.3.js"></script>
     <script src="Content/datepicker/WdatePicker.js"></script>
+
+
     <!--[if lt IE 9]>
     <script src="~Content/bootstrap/html5shiv.min.js"></script>
     <script src="~Content/bootstrap/respond.min.js"></script>
@@ -1640,7 +1645,9 @@
     </div>
     <div class="col-xs-12 lr-form-item">
         <div class="lr-form-item-title">加工时间<font face="宋体">*</font></div>
-        <input id="jgtime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <!--<input id="jgtime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>-->
+        <input id="jgtime" type="text" class="form-control lr-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })" isvalid="yes" checkexpession="NotNull" />
+
     </div>
     <div class="col-xs-12 lr-form-item">
         <div class="lr-form-item-title">加工量<font face="宋体">*</font></div>
@@ -1656,7 +1663,9 @@
     </div>
     <div class="col-xs-12 lr-form-item">
         <div class="lr-form-item-title">检验时间<font face="宋体">*</font></div>
-        <input id="jytime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <!--<input id="jytime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>-->
+        <input id="jytime" type="text" class="form-control lr-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })" isvalid="yes" checkexpession="NotNull" />
+
     </div>
     <div class="col-xs-12 lr-form-item">
         <div class="lr-form-item-title">检查项目<font face="宋体">*</font></div>
@@ -1672,52 +1681,16 @@
     </div>
 
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">商品</div>
+        <div class="lr-form-item-title"><font face="宋体">*</font>商品</div>
         <div>
-            <select name="commodityid" id="commodityid"  class="lr-select select_none">
 
+            <input id="commodityid" type="hidden" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+            <select name="entid" id="entid" onchange="seop(this)" class="lr-select select_none">
             </select>
         </div>
     </div>
 </div>
-<script>
-    $(function () {
-        // var elem_li = document.createElement('option'); // 生成一个 li元素
-        // elem_li.innerHTML = "<li data-value='4'>4</li>"; // 设置元素的内容
-        // elem_li.innerHTML = "4"; // 设置元素的内容
-        // document.getElementById('enterpriseid').appendChild(elem_li); // 添加到UL中去
 
-        var enterpriseid = $("select[name=commodityid]").val();
-        $("select[name=commodityid]").empty();      //清空
-        //var _LastModelId="1e82c79c303e46b0ac5abafeca8084e8";
-        $.ajax({
-            url:'${request.contextPath}/admin/ht/tblCompany/GetTree.html',
-            type:"post",
-            data:{
-                //brandId : brandId
-            },
-            cache: false,
-            error:function(){
-            },
-            success:function(data){
-                var modelList = data.data;
-
-                if(modelList && modelList.length != 0){
-                    for(var i=0; i<modelList.length; i++){
-                        var option="<option value=\""+modelList[i].id+"\"";
-//                        if(_LastModelId && _LastModelId==modelList[i].id){
-//                            option += " selected=\"selected\" "; //默认选中
-//                            _LastModelId=null;
-//                        }
-                        option += ">"+modelList[i].coname+"</option>";  //动态添加数据
-                        $("select[name=commodityid]").append(option);
-                    }
-                }
-            }
-        });
-
-    });
-</script>
 <script>
     var acceptClick;
     var keyValue = "";
@@ -1745,6 +1718,8 @@
                 if (!!d) {
                     keyValue = d.id;
                     a("#form").lrSetFormData(d)
+                    a("#jytime").val(b.formatDate(d.jytime, "yyyy-MM-dd hh:mm"));
+                    a("#jgtime").val(b.formatDate(d.jgtime, "yyyy-MM-dd hh:mm"));
                 }
             }
         };
@@ -4174,6 +4149,59 @@
         }
     });
 </script>
+<script>
+    //    function aaaa(){
+    //
+    //        var test1 = window.location.href;
+    //        var test2 = window.location.protocol;
+    //        var test3 = window.location.host;
+    //        var test4 = window.location.port;
+    //        var test5 = window.location.pathname;
+    //        var test6 = window.location.search;
+    //        var test7 = window.location.hash;
+    //        alert(test1+"---1111----"+test2+"---2222----"+test3+"---3333----"+test4+"---4444----"+
+    //            test5+"---55555----"+test6+"---6666----"+test7+"---7777----");
+    //
+    //    }
+    $(function () {
+        // var elem_li = document.createElement('option'); // 生成一个 li元素
+        // elem_li.innerHTML = "<li data-value='4'>4</li>"; // 设置元素的内容
+        // elem_li.innerHTML = "4"; // 设置元素的内容
+        // document.getElementById('enterpriseid').appendChild(elem_li); // 添加到UL中去
 
+        var enterpriseid = $("select[name=entid]").val();
+        $("select[name=entid]").empty();      //清空
+        var _LastModelId=$("#commodityid").val();
+        $.ajax({
+            url:'${request.contextPath}/admin/ht/commodity/GetList.html',
+            type:"post",
+            data:{
+                //brandId : brandId
+            },
+            cache: false,
+            error:function(){
+            },
+            success:function(data){
+                var modelList = data.data;
+
+                if(modelList && modelList.length != 0){
+                    for(var i=0; i<modelList.length; i++){
+                        var option="<option value=\""+modelList[i].id+"\"";
+                        if(_LastModelId && _LastModelId==modelList[i].id){
+                            option += " selected=\"selected\" "; //默认选中
+                            _LastModelId=null;
+                        }
+                        option += ">"+modelList[i].cname+"</option>";  //动态添加数据
+                        $("select[name=entid]").append(option);
+                    }
+                }
+            }
+        });
+
+    });
+    function seop(obj){
+        $("#commodityid").val(obj.value);
+    }
+</script>
 </body>
 </html>

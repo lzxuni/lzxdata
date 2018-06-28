@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico">
 
-    <title>商品管理</title>
+    <title>肥料管理</title>
     <link href="Content/pace/pace-theme-minimal.css" rel="stylesheet" />
     <link href="Content/font/css/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -1415,7 +1415,7 @@
                     b.layerForm({
                         id: "form",
                         title: "添加角色",
-                        url: top.$.rootUrl + "${request.contextPath}/admin/ht/machining/insert_v.html",
+                        url: top.$.rootUrl + "${request.contextPath}/admin/ht/fertilizer/insert_v.html",
                         width: 670,
                         height: 540,
                         callBack: function(d) {
@@ -1430,7 +1430,7 @@
                         b.layerForm({
                             id: "form",
                             title: "编辑角色",
-                            url: top.$.rootUrl + "${request.contextPath}/admin/ht/machining/insert_v.html",
+                            url: top.$.rootUrl + "${request.contextPath}/admin/ht/fertilizer/insert_v.html",
                             width: 670,
                             height: 540,
                             callBack: function(e) {
@@ -1444,7 +1444,7 @@
                     if (b.checkrow(d)) {
                         b.layerConfirm("是否确认删除该项！", function(e) {
                             if (e) {
-                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/admin/ht/machining/delete_o.html", {
+                                b.deleteForm(top.$.rootUrl + "${request.contextPath}/admin/ht/fertilizer/delete_o.html", {
                                     keyValue: d
                                 }, function() {
                                     refreshGirdData()
@@ -1545,50 +1545,40 @@
             },
             initGird: function() {
                 a("#girdtable").jfGrid({
-                    url: top.$.rootUrl + "${request.contextPath}/admin/ht/machining/index_o.html",
+                    url: top.$.rootUrl + "${request.contextPath}/admin/ht/fertilizer/index_o.html",
                     headData: [{
-                        label: "加工批次",
-                        name: "jgbatch",
+                        label: "肥料名称",
+                        name: "flname",
                         width: 200,
                         align: "left"
                     }, {
-                        label: "加工时间",
-                        name: "jgtime",
+                        label: "肥料生产单位",
+                        name: "flunit",
                         width: 130,
                         align: "center"
                     },{
-                        label: "加工量",
-                        name: "machiningno",
+                        label: "施肥时间",
+                        name: "sftime",
                         width: 130,
                         align: "center"
                     }, {
-                        label: "负责人",
+                        label: "肥料种类",
+                        name: "fltype",
+                        width: 130,
+                        align: "center"
+                    }, {
+                        label: "施肥方法",
+                        name: "sfmethod",
+                        width: 130,
+                        align: "center"
+                    },{
+                        label: "用量",
+                        name: "number",
+                        width: 130,
+                        align: "center"
+                    },{
+                        label: "责任人",
                         name: "people",
-                        width: 130,
-                        align: "center"
-                    }, {
-                        label: "生产批次",
-                        name: "scbatch",
-                        width: 130,
-                        align: "center"
-                    },{
-                        label: "检验时间",
-                        name: "jytime",
-                        width: 130,
-                        align: "center"
-                    },{
-                        label: "检查项目",
-                        name: "inspectxm",
-                        width: 130,
-                        align: "center"
-                    },{
-                        label: "检查数量",
-                        name: "inspectno",
-                        width: 130,
-                        align: "center"
-                    },{
-                        label: "检查结果",
-                        name: "inspectjg",
                         width: 130,
                         align: "center"
                     },{

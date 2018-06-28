@@ -1661,50 +1661,14 @@
     <div class="col-xs-12 lr-form-item">
         <div class="lr-form-item-title">生产企业</div>
         <div>
-            <select name="enterpriseid" id="enterpriseid"  class="lr-select select_none">
+            <input id="enterpriseid" type="hidden" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+            <select name="entid" id="entid" onchange="seop(this)" class="lr-select select_none">
 
             </select>
         </div>
     </div>
 </div>
-<script>
-    $(function () {
-        // var elem_li = document.createElement('option'); // 生成一个 li元素
-        // elem_li.innerHTML = "<li data-value='4'>4</li>"; // 设置元素的内容
-        // elem_li.innerHTML = "4"; // 设置元素的内容
-        // document.getElementById('enterpriseid').appendChild(elem_li); // 添加到UL中去
 
-        var enterpriseid = $("select[name=enterpriseid]").val();
-        $("select[name=enterpriseid]").empty();      //清空
-        //var _LastModelId="1e82c79c303e46b0ac5abafeca8084e8";
-        $.ajax({
-            url:'${request.contextPath}/admin/ht/tblCompany/GetTree.html',
-            type:"post",
-            data:{
-                //brandId : brandId
-            },
-            cache: false,
-            error:function(){
-            },
-            success:function(data){
-                var modelList = data.data;
-
-                if(modelList && modelList.length != 0){
-                    for(var i=0; i<modelList.length; i++){
-                        var option="<option value=\""+modelList[i].id+"\"";
-//                        if(_LastModelId && _LastModelId==modelList[i].id){
-//                            option += " selected=\"selected\" "; //默认选中
-//                            _LastModelId=null;
-//                        }
-                        option += ">"+modelList[i].coname+"</option>";  //动态添加数据
-                        $("select[name=enterpriseid]").append(option);
-                    }
-                }
-            }
-        });
-
-    });
-</script>
 <script>
     var acceptClick;
     var keyValue = "";
@@ -4161,6 +4125,47 @@
         }
     });
 </script>
+<script>
+    $(function () {
+        // var elem_li = document.createElement('option'); // 生成一个 li元素
+        // elem_li.innerHTML = "<li data-value='4'>4</li>"; // 设置元素的内容
+        // elem_li.innerHTML = "4"; // 设置元素的内容
+        // document.getElementById('enterpriseid').appendChild(elem_li); // 添加到UL中去
 
+        var enterpriseid = $("select[name=entid]").val();
+        $("select[name=entid]").empty();      //清空
+        var _LastModelId=$("#enterpriseid").val();
+
+        $.ajax({
+            url:'${request.contextPath}/admin/ht/tblCompany/GetTree.html',
+            type:"post",
+            data:{
+                //brandId : brandId
+            },
+            cache: false,
+            error:function(){
+            },
+            success:function(data){
+                var modelList = data.data;
+
+                if(modelList && modelList.length != 0){
+                    for(var i=0; i<modelList.length; i++){
+                        var option="<option  value=\""+modelList[i].id+"\"";
+                        if(_LastModelId && _LastModelId==modelList[i].id){
+                            option += " selected=\"selected\" "; //默认选中
+                            _LastModelId=null;
+                        }
+                        option += ">"+modelList[i].coname+"</option>";  //动态添加数据
+                        $("select[name=entid]").append(option);
+                    }
+                }
+            }
+        });
+
+    });
+    function seop(obj){
+        $("#enterpriseid").val(obj.value);
+    }
+</script>
 </body>
 </html>

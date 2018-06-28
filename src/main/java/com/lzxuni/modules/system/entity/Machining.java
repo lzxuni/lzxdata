@@ -19,13 +19,15 @@ public class Machining implements Serializable {
 
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
+    private String jgtime;    //	加工时间
+    private String jytime;    //	检验时间
+
     private String id;    //
     private String jgbatch;    //	加工批次
-    private String jgtime;    //	加工时间
     private String machiningno;    //	加工量
     private String people;    //	负责人
     private String scbatch;    //	生产批次
-    private String jytime;    //	检验时间
+
     private String inspectxm;    //	检查项目
     private String inspectno;    //	检查数量
     private String inspectjg;    //	检查结果
@@ -55,13 +57,7 @@ public class Machining implements Serializable {
         this.jgbatch = jgbatch;
     }
 
-    public String getJgtime() {
-        return jgtime;
-    }
 
-    public void setJgtime(String jgtime) {
-        this.jgtime = jgtime;
-    }
 
     public String getMachiningno() {
         return machiningno;
@@ -85,14 +81,6 @@ public class Machining implements Serializable {
 
     public void setScbatch(String scbatch) {
         this.scbatch = scbatch;
-    }
-
-    public String getJytime() {
-        return jytime;
-    }
-
-    public void setJytime(String jytime) {
-        this.jytime = jytime;
     }
 
     public String getInspectxm() {
@@ -125,5 +113,21 @@ public class Machining implements Serializable {
 
     public void setCommodityid(String commodityid) {
         this.commodityid = commodityid;
+    }
+
+    public String getJgtime() {
+        return jgtime;
+    }
+
+    public void setJgtime(String jgtime) {
+        this.jgtime = jgtime;
+    }
+
+    public String getJytime() {
+        return jytime;
+    }
+
+    public void setJytime(String jytime) {
+        this.jytime = jytime;
     }
 }
