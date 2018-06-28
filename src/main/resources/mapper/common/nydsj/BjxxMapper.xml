@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.common.mapper.nydsj.BjxxMapper">
+    <select id="findmohuBjxx" resultType="com.lzxuni.modules.common.entity.nydsj.Bjxx" parameterType="com.lzxuni.modules.common.entity.nydsj.Bjxx">
+          SELECT * FROM tbl_nydsj_bjxx WHERE  create_date LIKE CONCAT(CONCAT('%', #{createDate}), '%') OR region LIKE CONCAT(CONCAT('%', #{region}), '%') OR  situation LIKE CONCAT(CONCAT('%', #{situation}), '%') OR  situation_value LIKE CONCAT(CONCAT('%', #{situationValue}), '%') OR  standard LIKE CONCAT(CONCAT('%', #{standard}), '%')
+    </select>
+    <select id="queryList" resultType="com.lzxuni.modules.common.entity.nydsj.Bjxx" parameterType="com.lzxuni.modules.common.entity.nydsj.Bjxx">
+        SELECT * FROM tbl_nydsj_bjxx
+    </select>
+</mapper>

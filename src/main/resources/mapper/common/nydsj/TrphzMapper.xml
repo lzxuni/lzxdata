@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.common.mapper.nydsj.TrphzMapper">
+    <select id="findmohuTrphz" resultType="com.lzxuni.modules.common.entity.nydsj.Trphz" parameterType="com.lzxuni.modules.common.entity.nydsj.Trphz">
+          SELECT * FROM tbl_nydsj_trphz WHERE  ph LIKE CONCAT(CONCAT('%', #{ph}), '%') OR region LIKE CONCAT(CONCAT('%', #{region}), '%')
+    </select>
+    <select id="queryList" parameterType="com.lzxuni.modules.common.entity.nydsj.Trphz" resultType="com.lzxuni.modules.common.entity.nydsj.Trphz">
+        SELECT * FROM tbl_nydsj_trphz
+    </select>
+</mapper>

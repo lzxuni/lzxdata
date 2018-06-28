@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.common.mapper.nydsj.ZhsjMapper">
+    <select id="findmuhuZhsj" resultType="com.lzxuni.modules.common.entity.nydsj.Zhsj" parameterType="com.lzxuni.modules.common.entity.nydsj.Zhsj">
+          SELECT * FROM tbl_nydsj_zhsj WHERE  strength LIKE CONCAT(CONCAT('%', #{strength}), '%') OR temperature LIKE CONCAT(CONCAT('%', #{temperature}), '%') OR humidity LIKE CONCAT(CONCAT('%', #{humidity}), '%') OR rainfall LIKE CONCAT(CONCAT('%', #{rainfall}), '%') OR quality LIKE CONCAT(CONCAT('%', #{quality}), '%')
+    </select>
+    <select id="queryList" resultType="com.lzxuni.modules.common.entity.nydsj.Zhsj" parameterType="com.lzxuni.modules.common.entity.nydsj.Zhsj">
+        SELECT * FROM tbl_nydsj_zhsj
+    </select>
+</mapper>

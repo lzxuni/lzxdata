@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.common.mapper.nydsj.YxjMapper">
+    <select id="findmohuYxj" resultType="com.lzxuni.modules.common.entity.nydsj.Yxj" parameterType="com.lzxuni.modules.common.entity.nydsj.Yxj">
+          SELECT * FROM tbl_nydsj_yxj WHERE  potassium LIKE CONCAT(CONCAT('%', #{potassium}), '%') OR region LIKE CONCAT(CONCAT('%', #{region}), '%')
+    </select>
+    <select id="queryList" resultType="com.lzxuni.modules.common.entity.nydsj.Yxj" parameterType="com.lzxuni.modules.common.entity.nydsj.Yxj">
+        SELECT * FROM tbl_nydsj_yxj
+    </select>
+</mapper>
