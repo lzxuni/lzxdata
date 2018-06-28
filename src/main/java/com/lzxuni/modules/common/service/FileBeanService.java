@@ -21,4 +21,13 @@ public interface FileBeanService extends IService<FileBean> {
 	void update(FileBean fileBean);
 
 	void deleteByYwid(String ywid);
+	//多图插入
+	void insertFileBean(String imgJson,String ywid,String type,String ywType) throws Exception ;
+	//删除部门
+	void delFileBean(String ywid) throws Exception ;
+
+
+	//根据部门id查询部门
+	List<FileBean> findFileBeanByFileBeanCustom(FileBean fielBeanCustom) throws Exception ;
+
 }
