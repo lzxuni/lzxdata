@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.system.mapper.zjwd.ZjwdMapper">
+
+	<!-- 根据部门id查询部门 -->
+	<select id="queryListPhtotAndQszqtp"  resultType="com.lzxuni.modules.system.entity.zjwd.ZjwdCustom">
+		select a.*,b.urlPath as wttp from tbl_zjwd_zjwd a
+		LEFT JOIN sys_file b ON a.id=b.ywId
+	</select>
+
+</mapper>
