@@ -2,7 +2,13 @@
  * My97 DatePicker 4.8
  * License: http://www.my97.net/license.asp
  */
-var urls="http://"+window.location.host;
+
+
+var test1 = window.location.href;
+var test3 = window.location.host;
+var num1=test1.indexOf(test3);
+var urls=test1.substring(0,num1+test3.length);
+
 var $dp, WdatePicker;
 (function () {
     var l = {
