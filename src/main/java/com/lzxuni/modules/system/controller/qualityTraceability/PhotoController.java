@@ -49,14 +49,12 @@ public class PhotoController extends BaseController {
     public Object index_o(String pagination,
                           String cname) throws Exception {
         PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
-//        Commodity demo = JSON.parseObject(cname, Commodity.class);
-//        if (demo == null) {
-//            demo = new Commodity();
-//        }
+        Photo demo = JSON.parseObject(cname, Photo.class);
+        if (demo == null) {
+            demo = new Photo();
+        }
         //Photo demo = new Photo();
-        Photo demo = new Photo();
         demo.setCommodityid(cname);
-        //PageData pageData = getPageData(photoService.queryPage(pageParameter, demo));
         PageData pageData = getPageData(photoService.queryPage(pageParameter, demo));
         return R.ok(pageData);
     }
