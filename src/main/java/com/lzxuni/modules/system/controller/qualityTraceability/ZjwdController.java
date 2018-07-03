@@ -2,11 +2,13 @@ package com.lzxuni.modules.system.controller.qualityTraceability;
 
 import com.alibaba.fastjson.JSON;
 import com.lzxuni.common.utils.R;
+import com.lzxuni.common.utils.StringUtils;
 import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.common.service.FileBeanService;
+import com.lzxuni.modules.common.service.FileEntityService;
 import com.lzxuni.modules.system.entity.zjwd.Zjwd;
 import com.lzxuni.modules.system.entity.zjwd.ZjwdCustom;
 import com.lzxuni.modules.system.service.zjwd.ZjwdService;
@@ -21,7 +23,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 /**
- * MachiningController
+ * ZjwdController
  *
  * @author gyl
  * @version 1.0
@@ -35,7 +37,7 @@ public class ZjwdController extends BaseController {
     @Autowired
     private ZjwdService zjwdService;
     @Autowired
-    private FileBeanService fileBeanService;
+    private FileEntityService fileEntityService;
 
     // 列表
     @RequestMapping("/index_v.html")
@@ -57,65 +59,43 @@ public class ZjwdController extends BaseController {
         return R.ok(pageData);
     }
 
-    // 新增,
+    // 新增,修改
     @RequestMapping("/insert_v.html")
     public ModelAndView insert() throws Exception {
         ModelAndView mv = new ModelAndView("/ht/zjwd/Form");
         return mv;
     }
 
-    // 修改
-    @RequestMapping("/update_v.html")
-    public ModelAndView update() throws Exception {
-        ModelAndView mv = new ModelAndView("/ht/zjwd/Form1");
-        return mv;
-    }
 
-    // 新增, 处理
+    // 新增,修改 处理
     @RequestMapping("/insert_o.html")
-    public Object insertDo(ZjwdCustom zjwdCustom,String tts) throws Exception {
-        System.out.println(zjwdCustom.toString());
+    public Object insertDo(Zjwd demo,String tts) throws Exception {
+        System.out.println(demo.getId()+"------demo.getId()");
         System.out.println("tts----------"+tts);
-        Zjwd demo = new Zjwd();
-        demo.setId(UuidUtil.get32UUID());
-        demo.setCreatetime(new Date());
-        //fileBeanService.insertFileBean(zjwdCustom.getWttp(), demo.getId(), "问题图片", "wttp");
-        fileBeanService.insertFileBean(tts, demo.getId(), "问题图片", "wttp");
-
-        demo.setWttitle(zjwdCustom.getWttitle());
-        demo.setWtneirong(zjwdCustom.getWtneirong());
-        demo.setZjid(zjwdCustom.getZjid());
-        demo.setZjanswer(zjwdCustom.getZjanswer());
-        demo.setZhuiwen(zjwdCustom.getZhuiwen());
-        demo.setZhuida(zjwdCustom.getZhuida());
-
-        zjwdService.insert(demo);
-        return R.ok("新增成功");
-
-    }
-
-    // 修改 处理
-    @RequestMapping("/update_o.html")
-    public Object updateDo(ZjwdCustom zjwdCustom) throws Exception {
-        System.out.println(zjwdCustom.toString());
-        System.out.println("zjxxCustom.getQszqtpupdate()------"+zjwdCustom.getWttpupdate());
-        if (zjwdCustom.getWttpupdate() != null ) {
-            fileBeanService.delFileBean(zjwdCustom.getId());
-            fileBeanService.insertFileBean(zjwdCustom.getWttpupdate(), zjwdCustom.getId(), "问题图片", "wttp");
-
+        String ids=demo.getId();
+        if(ids.length()>32){
+            ids=ids.split(",")[0];
+        }else{
+            ids=null;
         }
-        Zjwd demo = new Zjwd();
-        demo.setId(zjwdCustom.getId());
-        demo.setCreatetime(zjwdCustom.getCreatetime());
-        demo.setWttitle(zjwdCustom.getWttitle());
-        demo.setWtneirong(zjwdCustom.getWtneirong());
-        demo.setZjid(zjwdCustom.getZjid());
-        demo.setZjanswer(zjwdCustom.getZjanswer());
-        demo.setZhuiwen(zjwdCustom.getZhuiwen());
-        demo.setZhuida(zjwdCustom.getZhuida());
-        zjwdService.updateById(demo);
-        return R.ok("修改成功");
+        demo.setId(ids);
+        System.out.println("ids-----------"+ids);
+
+        if(StringUtils.isEmpty(ids)){
+            demo.setId(UuidUtil.get32UUID());
+            demo.setCreatetime(new Date());
+            fileEntityService.insert(tts,demo.getId(),"问题图片","wttp","问题图片");
+            zjwdService.insert(demo);
+            return R.ok("新增成功");
+        }else{
+            fileEntityService.deleteByYwId(demo.getId());
+            fileEntityService.insert(tts,demo.getId(),"问题图片","wttp","问题图片");
+            zjwdService.updateById(demo);
+            return R.ok("修改成功");
+        }
     }
+
+
 
     //删除
     @RequestMapping("/delete_o.html")

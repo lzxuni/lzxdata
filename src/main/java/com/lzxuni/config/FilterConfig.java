@@ -47,4 +47,20 @@ public class FilterConfig {
         registration.setOrder(Integer.MAX_VALUE);
         return registration;
     }
+
+    @Bean
+    public FilterRegistrationBean staticResourceFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        registration.setFilter(staticResourceFilter());
+        registration.addUrlPatterns("/resource/*");
+        registration.setName("staticResourceFilter");
+        registration.setOrder(Integer.MAX_VALUE);
+        return registration;
+    }
+
+    @Bean(name = "staticResourceFilter")
+    public StaticResourceFilter staticResourceFilter() {
+        return new StaticResourceFilter();
+    }
 }
