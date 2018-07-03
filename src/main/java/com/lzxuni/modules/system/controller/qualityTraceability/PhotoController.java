@@ -8,8 +8,8 @@ import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.common.service.FileBeanService;
+import com.lzxuni.modules.common.service.FileEntityService;
 import com.lzxuni.modules.system.entity.zlzs.Photo;
-import com.lzxuni.modules.system.entity.zlzs.PhotoCustom;
 import com.lzxuni.modules.system.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +35,7 @@ public class PhotoController extends BaseController {
     @Autowired
     private PhotoService photoService;
     @Autowired
-    private FileBeanService fileBeanService;
+    private FileEntityService fileEntityService;
 
     // 列表
     @RequestMapping("/index_v.html")
@@ -54,71 +54,47 @@ public class PhotoController extends BaseController {
 //            demo = new Commodity();
 //        }
         //Photo demo = new Photo();
-        PhotoCustom demo = new PhotoCustom();
+        Photo demo = new Photo();
         demo.setCommodityid(cname);
         //PageData pageData = getPageData(photoService.queryPage(pageParameter, demo));
-        PageData pageData = getPageData(photoService.queryListPhtotAndQszqtp(pageParameter, demo));
+        PageData pageData = getPageData(photoService.queryPage(pageParameter, demo));
         return R.ok(pageData);
     }
 
-    // 新增,
+    // 新增,修改
     @RequestMapping("/insert_v.html")
     public ModelAndView insert() throws Exception {
         ModelAndView mv = new ModelAndView("/ht/photo/Form");
         return mv;
     }
 
-    // 修改
-    @RequestMapping("/update_v.html")
-    public ModelAndView update() throws Exception {
-        ModelAndView mv = new ModelAndView("/ht/photo/Form1");
-        return mv;
-    }
 
-    // 新增, 处理
+    // 新增,修改 处理  qszqtp
     @RequestMapping("/insert_o.html")
-    public Object insertDo(PhotoCustom photoCustom) throws Exception {
-        System.out.println(photoCustom.toString());
-//        if (StringUtils.isEmpty(photoCustom.getId())) {
-        Photo demo = new Photo();
-        demo.setId(UuidUtil.get32UUID());
-        demo.setCreatetime(new Date());
-        System.out.println("--------" + photoCustom.getQszqtp());
-        fileBeanService.insertFileBean(photoCustom.getQszqtp(), demo.getId(), "全生长期图片", "qszqtp");
-        demo.setCommodityid(photoCustom.getCommodityid());
-        demo.setPremarks(photoCustom.getPremarks());
-        demo.setPtime(photoCustom.getPtime());
-        demo.setPtitle(photoCustom.getPtitle());
-        photoService.insert(demo);
-        return R.ok("新增成功");
-//        } else {
-//            fileBeanService.delFileBean(photoCustom.getId());
-//            fileBeanService.insertFileBean(photoCustom.getQszqtp(),photoCustom.getId(),"全生长期图片","qszqtp");
-//            photoService.updateById(photoCustom);
-//            return R.ok("修改成功");
-//        }
-    }
-
-    // 修改 处理
-    @RequestMapping("/update_o.html")
-    public Object updateDo(PhotoCustom photoCustom) throws Exception {
-        System.out.println(photoCustom.toString());
-        System.out.println("photoCustom.getQszqtpupdate()------"+photoCustom.getQszqtpupdate());
-        if (photoCustom.getQszqtpupdate() != null ) {
-            fileBeanService.delFileBean(photoCustom.getId());
-            fileBeanService.insertFileBean(photoCustom.getQszqtpupdate(), photoCustom.getId(), "全生长期图片", "qszqtp");
-
+    public Object insertDo(Photo demo,String tts) throws Exception {
+        String ids=demo.getId();
+        if(ids.length()>32){
+            ids=ids.split(",")[0];
+        }else{
+            ids=null;
         }
-        Photo demo = new Photo();
-        demo.setId(photoCustom.getId());
-        demo.setCreatetime(photoCustom.getCreatetime());
-        demo.setCommodityid(photoCustom.getCommodityid());
-        demo.setPremarks(photoCustom.getPremarks());
-        demo.setPtime(photoCustom.getPtime());
-        demo.setPtitle(photoCustom.getPtitle());
-        photoService.updateById(demo);
-        return R.ok("修改成功");
+        demo.setId(ids);
+
+        if(StringUtils.isEmpty(ids)){
+            demo.setId(UuidUtil.get32UUID());
+            demo.setCreatetime(new Date());
+            fileEntityService.insert(tts,demo.getId(),"全生长期图片","qszqtp",demo.getPtitle());
+            photoService.insert(demo);
+            return R.ok("新增成功");
+        }else{
+            fileEntityService.deleteByYwId(demo.getId());
+            fileEntityService.insert(tts,demo.getId(),"全生长期图片","qszqtp",demo.getPtitle());
+            photoService.updateById(demo);
+            return R.ok("修改成功");
+        }
     }
+
+
 
     //删除
     @RequestMapping("/delete_o.html")

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.system.entity.zlzs.Photo;
-import com.lzxuni.modules.system.entity.zlzs.PhotoCustom;
 
 import java.util.List;
 
@@ -22,7 +21,6 @@ public interface PhotoService extends IService<Photo> {
 
     List<Photo> queryList(Photo demo) throws Exception;
 
-    PageInfo<PhotoCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, PhotoCustom demo) throws Exception;
 
 
 }

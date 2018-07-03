@@ -7,7 +7,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.system.entity.zlzs.Photo;
-import com.lzxuni.modules.system.entity.zlzs.PhotoCustom;
 import com.lzxuni.modules.system.mapper.PhotoMapper;
 import com.lzxuni.modules.system.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +43,7 @@ public class PhotoServiceImpl extends ServiceImpl<PhotoMapper, Photo> implements
     }
 
 
-    @Override
-    public PageInfo<PhotoCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, PhotoCustom demo) {
-        PageHelper.startPage(pageParameter.getPage(), pageParameter.getRows()).setOrderBy(
-                pageParameter.getSidx() + " " + pageParameter.getSord());
-        List<PhotoCustom> roleList = null;
-        try {
-            roleList = photoMapper.queryListPhtotAndQszqtp();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        PageInfo<PhotoCustom> pageInfo = new PageInfo<>(roleList);
-        return pageInfo;
-    }
+
 
 
 }

@@ -1673,18 +1673,25 @@
     </div>
 
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">添加图片<font face="宋体">*</font></div>
+        <div class="lr-form-item-title">添加图片<font face="宋体">*</font>
+            <input type="hidden" id="tts" class="form-control">
+            <input type="hidden" id="id" class="form-control" />
+        </div>
         <div id="uploader" class="uploader">
         </div>
     </div>
 
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        path="http://"+window.location.host;
-        $(".fancybox").fancybox({openEffect:"none",closeEffect:"none"});
-        $("#uploader").powerWebUpload({ auto: true,fileNumLimit:1,type:"image",fileName:"qszqtp" });
-    });
+    function duotushangchuan(){
+        var pics=document.getElementsByName("qszqtp");
+        //alert(pics.length)
+        var uu="";
+        for(i=0;i<pics.length;i++){
+            uu+=pics[i].value+",";
+        }
+        $("#tts").val(uu);
+    }
 
 </script>
     <script>
@@ -1720,6 +1727,9 @@
                     }
                 }
             };
+            $(".fancybox").fancybox({openEffect:"none",closeEffect:"none"});
+            $("#uploader").powerWebUpload({ auto: true,fileNumLimit:5,type:"image",fileName:"qszqtp" });
+
             acceptClick = function (e) {
                 if (!a("#form").lrValidform()) {
                     return false
@@ -1771,6 +1781,7 @@
                 c(a(this))
             };
             a.fn.lrValidform = function () {
+                duotushangchuan();
                 var d = true;
                 var e = b.validator;
                 a(this).find("[isvalid=yes]").each(function () {
