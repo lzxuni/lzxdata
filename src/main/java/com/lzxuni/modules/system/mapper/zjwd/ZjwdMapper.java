@@ -20,7 +20,6 @@ import java.util.List;
  **/
 @Mapper
 public interface ZjwdMapper extends BaseMapper<Zjwd> {
-    //查询部门列表
-    List<ZjwdCustom> queryListPhtotAndQszqtp() throws SQLException;
+
 
 }

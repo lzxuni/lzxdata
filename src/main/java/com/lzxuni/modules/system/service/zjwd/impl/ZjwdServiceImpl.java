@@ -48,19 +48,19 @@ public class ZjwdServiceImpl extends ServiceImpl<ZjwdMapper, Zjwd> implements Zj
     }
 
 
-    @Override
-    public PageInfo<ZjwdCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, ZjwdCustom demo) {
-        PageHelper.startPage(pageParameter.getPage(), pageParameter.getRows()).setOrderBy(
-                pageParameter.getSidx() + " " + pageParameter.getSord());
-        List<ZjwdCustom> roleList = null;
-        try {
-            roleList = zjwdMapper.queryListPhtotAndQszqtp();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        PageInfo<ZjwdCustom> pageInfo = new PageInfo<>(roleList);
-        return pageInfo;
-    }
+//    @Override
+//    public PageInfo<ZjwdCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, ZjwdCustom demo) {
+//        PageHelper.startPage(pageParameter.getPage(), pageParameter.getRows()).setOrderBy(
+//                pageParameter.getSidx() + " " + pageParameter.getSord());
+//        List<ZjwdCustom> roleList = null;
+//        try {
+//            roleList = zjwdMapper.queryListPhtotAndQszqtp();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        PageInfo<ZjwdCustom> pageInfo = new PageInfo<>(roleList);
+//        return pageInfo;
+//    }
 
 
 }

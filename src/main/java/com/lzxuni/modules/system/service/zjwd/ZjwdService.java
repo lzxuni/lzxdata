@@ -24,7 +24,7 @@ public interface ZjwdService extends IService<Zjwd> {
 
     List<Zjwd> queryList(Zjwd demo) throws Exception;
 
-    PageInfo<ZjwdCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, ZjwdCustom demo) throws Exception;
+    //PageInfo<ZjwdCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, ZjwdCustom demo) throws Exception;
 
 
 }

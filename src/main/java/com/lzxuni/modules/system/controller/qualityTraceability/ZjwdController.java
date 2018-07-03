@@ -52,10 +52,10 @@ public class ZjwdController extends BaseController {
                           String cname) throws Exception {
         PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
 
-        ZjwdCustom demo = new ZjwdCustom();
+        Zjwd demo = new Zjwd();
         //demo.setCommodityid(cname);
         //PageData pageData = getPageData(photoService.queryPage(pageParameter, demo));
-        PageData pageData = getPageData(zjwdService.queryListPhtotAndQszqtp(pageParameter, demo));
+        PageData pageData = getPageData(zjwdService.queryPage(pageParameter, demo));
         return R.ok(pageData);
     }
 
