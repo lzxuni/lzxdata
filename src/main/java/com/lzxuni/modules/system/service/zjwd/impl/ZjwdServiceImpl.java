@@ -7,17 +7,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.system.entity.zjwd.Zjwd;
-import com.lzxuni.modules.system.entity.zjwd.ZjwdCustom;
-import com.lzxuni.modules.system.entity.zjwd.Zjxx;
-import com.lzxuni.modules.system.entity.zjwd.ZjxxCustom;
 import com.lzxuni.modules.system.mapper.zjwd.ZjwdMapper;
-import com.lzxuni.modules.system.mapper.zjwd.ZjxxMapper;
 import com.lzxuni.modules.system.service.zjwd.ZjwdService;
-import com.lzxuni.modules.system.service.zjwd.ZjxxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**

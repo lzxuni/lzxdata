@@ -7,12 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.system.entity.zjwd.Zjxx;
-import com.lzxuni.modules.system.entity.zjwd.ZjxxCustom;
-import com.lzxuni.modules.system.entity.zlzs.Photo;
-import com.lzxuni.modules.system.entity.zlzs.PhotoCustom;
-import com.lzxuni.modules.system.mapper.PhotoMapper;
 import com.lzxuni.modules.system.mapper.zjwd.ZjxxMapper;
-import com.lzxuni.modules.system.service.PhotoService;
 import com.lzxuni.modules.system.service.zjwd.ZjxxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,19 +43,7 @@ public class ZjxxServiceImpl extends ServiceImpl<ZjxxMapper, Zjxx> implements Zj
     }
 
 
-    @Override
-    public PageInfo<ZjxxCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, ZjxxCustom demo) {
-        PageHelper.startPage(pageParameter.getPage(), pageParameter.getRows()).setOrderBy(
-                pageParameter.getSidx() + " " + pageParameter.getSord());
-        List<ZjxxCustom> roleList = null;
-        try {
-            roleList = zjxxMapper.queryListPhtotAndQszqtp();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        PageInfo<ZjxxCustom> pageInfo = new PageInfo<>(roleList);
-        return pageInfo;
-    }
+
 
 
 }

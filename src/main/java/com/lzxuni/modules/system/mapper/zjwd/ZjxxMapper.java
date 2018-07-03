@@ -2,9 +2,6 @@ package com.lzxuni.modules.system.mapper.zjwd;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.lzxuni.modules.system.entity.zjwd.Zjxx;
-import com.lzxuni.modules.system.entity.zjwd.ZjxxCustom;
-import com.lzxuni.modules.system.entity.zlzs.Photo;
-import com.lzxuni.modules.system.entity.zlzs.PhotoCustom;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
@@ -20,7 +17,6 @@ import java.util.List;
  **/
 @Mapper
 public interface ZjxxMapper extends BaseMapper<Zjxx> {
-    //查询部门列表
-    List<ZjxxCustom> queryListPhtotAndQszqtp() throws SQLException;
+
 
 }

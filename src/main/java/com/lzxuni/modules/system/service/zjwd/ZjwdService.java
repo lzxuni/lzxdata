@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.system.entity.zjwd.Zjwd;
-import com.lzxuni.modules.system.entity.zjwd.ZjwdCustom;
-import com.lzxuni.modules.system.entity.zjwd.Zjxx;
-import com.lzxuni.modules.system.entity.zjwd.ZjxxCustom;
 
 import java.util.List;
 

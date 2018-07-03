@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.system.entity.zjwd.Zjxx;
-import com.lzxuni.modules.system.entity.zjwd.ZjxxCustom;
-import com.lzxuni.modules.system.entity.zlzs.Photo;
-import com.lzxuni.modules.system.entity.zlzs.PhotoCustom;
 
 import java.util.List;
 
@@ -24,7 +21,6 @@ public interface ZjxxService extends IService<Zjxx> {
 
     List<Zjxx> queryList(Zjxx demo) throws Exception;
 
-    PageInfo<ZjxxCustom> queryListPhtotAndQszqtp(PageParameter pageParameter, ZjxxCustom demo) throws Exception;
 
 
 }

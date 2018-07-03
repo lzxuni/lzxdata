@@ -2,14 +2,14 @@ package com.lzxuni.modules.system.controller.qualityTraceability;
 
 import com.alibaba.fastjson.JSON;
 import com.lzxuni.common.utils.R;
+import com.lzxuni.common.utils.StringUtils;
 import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.common.service.FileBeanService;
-import com.lzxuni.modules.system.entity.Commodity;
+import com.lzxuni.modules.common.service.FileEntityService;
 import com.lzxuni.modules.system.entity.zjwd.Zjxx;
-import com.lzxuni.modules.system.entity.zjwd.ZjxxCustom;
 
 import com.lzxuni.modules.system.service.zjwd.ZjxxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class ZjxxController extends BaseController {
     @Autowired
     private ZjxxService zjxxService;
     @Autowired
-    private FileBeanService fileBeanService;
+    private FileEntityService fileEntityService;
 
     // 列表
     @RequestMapping("/index_v.html")
@@ -52,68 +52,47 @@ public class ZjxxController extends BaseController {
                           String cname) throws Exception {
         PageParameter pageParameter = JSON.parseObject(pagination, PageParameter.class);
 
-        ZjxxCustom demo = new ZjxxCustom();
+        Zjxx demo = new Zjxx();
         //demo.setCommodityid(cname);
         //PageData pageData = getPageData(photoService.queryPage(pageParameter, demo));
-        PageData pageData = getPageData(zjxxService.queryListPhtotAndQszqtp(pageParameter, demo));
+        PageData pageData = getPageData(zjxxService.queryPage(pageParameter, demo));
         return R.ok(pageData);
     }
 
-    // 新增,
+    // 新增,修改
     @RequestMapping("/insert_v.html")
     public ModelAndView insert() throws Exception {
         ModelAndView mv = new ModelAndView("/ht/zjxx/Form");
         return mv;
     }
 
-    // 修改
-    @RequestMapping("/update_v.html")
-    public ModelAndView update() throws Exception {
-        ModelAndView mv = new ModelAndView("/ht/zjxx/Form1");
-        return mv;
-    }
 
-    // 新增, 处理
+    // 新增,修改 处理
     @RequestMapping("/insert_o.html")
-    public Object insertDo(ZjxxCustom zjxxCustom) throws Exception {
-        System.out.println(zjxxCustom.toString());
-        Zjxx demo = new Zjxx();
-        demo.setId(UuidUtil.get32UUID());
-        demo.setCreatetime(new Date());
-        System.out.println("--------" + zjxxCustom.getZjtp());
-        fileBeanService.insertFileBean(zjxxCustom.getZjtp(), demo.getId(), "专家头像", "zjtp");
-        demo.setZjname(zjxxCustom.getZjname());
-        demo.setZjschool(zjxxCustom.getZjschool());
-        demo.setZjintroduction(zjxxCustom.getZjintroduction());
-        demo.setPlnumber(zjxxCustom.getPlnumber());
-        demo.setDznumber(zjxxCustom.getDznumber());
-
-        zjxxService.insert(demo);
-        return R.ok("新增成功");
-
-    }
-
-    // 修改 处理
-    @RequestMapping("/update_o.html")
-    public Object updateDo(ZjxxCustom zjxxCustom) throws Exception {
-        System.out.println(zjxxCustom.toString());
-        System.out.println("zjxxCustom.getQszqtpupdate()------"+zjxxCustom.getZjtpupdate());
-        if (zjxxCustom.getZjtpupdate() != null ) {
-            fileBeanService.delFileBean(zjxxCustom.getId());
-            fileBeanService.insertFileBean(zjxxCustom.getZjtpupdate(), zjxxCustom.getId(), "专家头像", "zjtp");
-
+    public Object insertDo(Zjxx demo,String tts) throws Exception {
+        String ids=demo.getId();
+        if(ids.length()>32){
+            ids=ids.split(",")[0];
+        }else{
+            ids=null;
         }
-        Zjxx demo = new Zjxx();
-        demo.setId(zjxxCustom.getId());
-        demo.setCreatetime(zjxxCustom.getCreatetime());
-        demo.setZjname(zjxxCustom.getZjname());
-        demo.setZjschool(zjxxCustom.getZjschool());
-        demo.setZjintroduction(zjxxCustom.getZjintroduction());
-        demo.setPlnumber(zjxxCustom.getPlnumber());
-        demo.setDznumber(zjxxCustom.getDznumber());
-        zjxxService.updateById(demo);
-        return R.ok("修改成功");
+        demo.setId(ids);
+        if(StringUtils.isEmpty(ids)){
+            demo.setId(UuidUtil.get32UUID());
+            demo.setCreatetime(new Date());
+            fileEntityService.insert(tts,demo.getId(),"专家头像","zjtp","专家头像");
+            zjxxService.insert(demo);
+            return R.ok("新增成功");
+        }else{
+            fileEntityService.deleteByYwId(demo.getId());
+            fileEntityService.insert(tts,demo.getId(),"专家头像","zjtp","专家头像");
+            zjxxService.updateById(demo);
+            return R.ok("修改成功");
+        }
+
     }
+
+
 
     //删除
     @RequestMapping("/delete_o.html")

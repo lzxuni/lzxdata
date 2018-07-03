@@ -7,10 +7,8 @@ import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
-import com.lzxuni.modules.common.service.FileBeanService;
 import com.lzxuni.modules.common.service.FileEntityService;
 import com.lzxuni.modules.system.entity.zjwd.Zjwd;
-import com.lzxuni.modules.system.entity.zjwd.ZjwdCustom;
 import com.lzxuni.modules.system.service.zjwd.ZjwdService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +68,7 @@ public class ZjwdController extends BaseController {
     // 新增,修改 处理
     @RequestMapping("/insert_o.html")
     public Object insertDo(Zjwd demo,String tts) throws Exception {
-        System.out.println(demo.getId()+"------demo.getId()");
-        System.out.println("tts----------"+tts);
+
         String ids=demo.getId();
         if(ids.length()>32){
             ids=ids.split(",")[0];
@@ -79,7 +76,6 @@ public class ZjwdController extends BaseController {
             ids=null;
         }
         demo.setId(ids);
-        System.out.println("ids-----------"+ids);
 
         if(StringUtils.isEmpty(ids)){
             demo.setId(UuidUtil.get32UUID());
