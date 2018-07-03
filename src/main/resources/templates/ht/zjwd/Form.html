@@ -4197,16 +4197,18 @@
                     var modelList = data.data;
 
                     if (modelList && modelList.length != 0) {
+                        $("#zjid").val(modelList[0].id);
                         for (var i = 0; i < modelList.length; i++) {
                             var option = "<option value=\"" + modelList[i].id + "\"";
                             if (_LastModelId && _LastModelId == modelList[i].id) {
                                 option += " selected=\"selected\" "; //默认选中
                                 _LastModelId = null;
+                                $("#zjid").val(modelList[i].id);
                             }
                             option += ">" + modelList[i].zjname + "</option>";  //动态添加数据
                             $("select[name=entid]").append(option);
                         }
-                        $("#zjid").val(modelList[0].id);
+
                     }
                 }
             });
