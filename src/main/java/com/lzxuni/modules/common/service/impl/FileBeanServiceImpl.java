@@ -1,5 +1,6 @@
 package com.lzxuni.modules.common.service.impl;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.lzxuni.common.utils.MethodUtil;
 import com.lzxuni.common.utils.UuidUtil;
@@ -7,6 +8,7 @@ import com.lzxuni.modules.common.entity.FileBean;
 import com.lzxuni.modules.common.mapper.FileBeanMapper;
 import com.lzxuni.modules.common.service.FileBeanService;
 import net.sf.json.JSONArray;
+import org.apache.http.entity.FileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,12 @@ public class FileBeanServiceImpl extends ServiceImpl<FileBeanMapper, FileBean> i
 
 	@Override
 	public List<FileBean> selectList(FileBean fileBean) {
-		return null;
+		//return null;
+		return fileBeanMapper.selectList(
+				new EntityWrapper<FileBean>()
+						.eq("ywId", fileBean.getYwId())
+						.eq("ywType", fileBean.getYwType())
+		);
 	}
 
 	@Override

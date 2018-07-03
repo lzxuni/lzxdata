@@ -1652,8 +1652,8 @@
         <input id="wttitle" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">问题内容<font face="宋体">*</font></div>
-        <input id="wtneirong" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">问题内容</div>
+        <input id="wtneirong" type="text" class="form-control" />
     </div>
 
     <div class="col-xs-12 lr-form-item">
@@ -1670,12 +1670,13 @@
         <input id="zjanswer" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">追问<font face="宋体">*</font></div>
-        <input id="zhuiwen" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">追问</div>
+        <input id="zhuiwen" type="text" class="form-control" />
     </div>
     <div class="col-xs-12 lr-form-item">
-        <div class="lr-form-item-title">追答<font face="宋体">*</font></div>
-        <input id="zhuida" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <div class="lr-form-item-title">追答</div>
+        <input id="zhuida" type="text" class="form-control" />
+        <input type="text" id="tts" class="form-control">
     </div>
     <div class="col-xs-12 lr-form-item">
         <div class="lr-form-item-title">问题图片<font face="宋体">*</font></div>
@@ -1685,12 +1686,23 @@
 
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        path="http://"+window.location.host;
-        $(".fancybox").fancybox({openEffect:"none",closeEffect:"none"});
-        $("#uploader").powerWebUpload({ auto: true,fileNumLimit:1,type:"image",fileName:"wttp" });
-    });
 
+    var urls=window.location.href.substring(0,window.location.href.indexOf(window.location.host)+window.location.host.length);
+    $(document).ready(function(){
+        //path="http://"+window.location.host;
+        path=urls;
+        $(".fancybox").fancybox({openEffect:"none",closeEffect:"none"});
+        $("#uploader").powerWebUpload({ auto: true,fileNumLimit:5,type:"image",fileName:"wttp" });
+    });
+    function tttt(){
+        var pics=document.getElementsByName("wttp");
+        alert(pics.length)
+        var uu="";
+        for(i=0;i<pics.length;i++){
+            uu+=pics[i].value+",";
+        }
+        $("#tts").val(uu);
+    }
 </script>
     <script>
         var acceptClick;
@@ -1730,6 +1742,8 @@
                     return false
                 }
                 var f = a("#form").lrGetFormData(keyValue);
+                alert(111111);
+                //tttt();
                 a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/admin/ht/zjwd/insert_o.html?id=" + keyValue, f, function (g) {
                     if (!!e) {
                         e()
@@ -1776,6 +1790,8 @@
                 c(a(this))
             };
             a.fn.lrValidform = function () {
+                alert(444444444444);
+                tttt();
                 var d = true;
                 var e = b.validator;
                 a(this).find("[isvalid=yes]").each(function () {

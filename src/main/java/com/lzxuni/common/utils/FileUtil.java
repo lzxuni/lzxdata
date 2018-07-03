@@ -1,5 +1,8 @@
 package com.lzxuni.common.utils;
 
+import com.lzxuni.common.exception.LzxException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 
 import javax.swing.*;
@@ -15,13 +18,14 @@ import java.nio.channels.FileChannel;
 
 /**
  * 文件工具类
- * 
+ *
  * @author
  */
 public class FileUtil {
+	protected static Logger log = LoggerFactory.getLogger(FileUtil.class);
 	/**
 	 * 下载文件时，针对不同浏览器，进行附件名的编码
-	 * 
+	 *
 	 * @param filename
 	 *            下载文件名
 	 * @param agent
@@ -29,22 +33,20 @@ public class FileUtil {
 	 * @return 编码后的下载附件名
 	 * @throws IOException
 	 */
-	public static String encodeDownloadFilename(String filename, String agent)
-			throws IOException {
+	public static String encodeDownloadFilename(String filename, String agent) throws IOException {
 		if (agent.contains("Firefox")) { // 火狐浏览器
-			filename = "=?UTF-8?B?"
-					+ new BASE64Encoder().encode(filename.getBytes("utf-8"))
-					+ "?=";
+			filename = "=?UTF-8?B?" + new BASE64Encoder().encode(filename.getBytes("utf-8")) + "?=";
 			filename = filename.replaceAll("\r\n", "");
 		} else { // IE及其他浏览器
 			filename = URLEncoder.encode(filename, "utf-8");
-			filename = filename.replace("+"," ");
+			filename = filename.replace("+", " ");
 		}
 		return filename;
 	}
+
 	/**
 	 * 读取到字节数组2
-	 * 
+	 *
 	 * @param filePath
 	 * @return
 	 * @throws IOException
@@ -68,21 +70,25 @@ public class FileUtil {
 			}
 			return byteBuffer.array();
 		} catch (IOException e) {
+			log.error(e.getClass().getName()+":"+e.getMessage());
 			e.printStackTrace();
 			throw e;
 		} finally {
 			try {
 				channel.close();
 			} catch (IOException e) {
+				log.error(e.getClass().getName()+":"+e.getMessage());
 				e.printStackTrace();
 			}
 			try {
 				fs.close();
 			} catch (IOException e) {
+				log.error(e.getClass().getName()+":"+e.getMessage());
 				e.printStackTrace();
 			}
 		}
 	}
+
 	public static BufferedImage toBufferedImage(Image image) {
 		if (image instanceof BufferedImage) {
 			return (BufferedImage) image;
@@ -112,8 +118,9 @@ public class FileUtil {
 			GraphicsConfiguration gc = gs.getDefaultConfiguration();
 			bimage = gc.createCompatibleImage(image.getWidth(null), image.getHeight(null), transparency);
 		} catch (HeadlessException e) {
-			// The system does not have a screen
+			log.error(e.getClass().getName()+":"+e.getMessage());
 		} catch (Exception e) {
+			log.error(e.getClass().getName()+":"+e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -139,13 +146,13 @@ public class FileUtil {
 
 	/**
 	 * 是否是允许上传文件
-	 * 
-	 * @param ex
+	 *
+	 * @param logoFileName
 	 * @return
 	 */
 	public static boolean isAllowUp(String logoFileName) {
 		logoFileName = logoFileName.toLowerCase();
-		String allowTYpe = "gif,jpg,jpeg,bmp,swf,png,rar,doc,docx,xls,xlsx,pdf,zip,ico,txt,mp4";
+		String allowTYpe = "gif,jpg,jpeg,bmp,swf,png,rar,doc,docx,xls,xlsx,pdf,zip,ico,txt,mp4,flv";
 		if (!logoFileName.trim().equals("") && logoFileName.length() > 0) {
 			String ex = logoFileName.substring(logoFileName.lastIndexOf(".") + 1, logoFileName.length());
 			// return allowTYpe.toString().indexOf(ex) >= 0;
@@ -157,10 +164,29 @@ public class FileUtil {
 			return false;
 		}
 	}
-	
+	/**
+	 * 是否是允许上传文件
+	 *
+	 * @param logoFileName
+	 * @return
+	 */
+	public static boolean isNotAllowUp(String logoFileName) {
+		logoFileName = logoFileName.toLowerCase();
+		String allowTYpe = "exe,sh,bat";
+		if (!logoFileName.trim().equals("") && logoFileName.length() > 0) {
+			String ex = logoFileName.substring(logoFileName.lastIndexOf(".") + 1, logoFileName.length());
+			// return allowTYpe.toString().indexOf(ex) >= 0;
+			// lzf edit 20110717
+			// 解决只认小写问题
+			// 同时加入jpeg扩展名/png扩展名
+			return allowTYpe.toUpperCase().indexOf(ex.toUpperCase()) >= 0;
+		} else {
+			return false;
+		}
+	}
 	/**
 	 * 是否是允许上传的图片
-	 * 
+	 *
 	 * @param imgFileName
 	 * @return
 	 */
@@ -177,19 +203,68 @@ public class FileUtil {
 
 	/**
 	 * 得到文件的扩展名
-	 * 
+	 *
 	 * @param fileName
 	 * @return
 	 */
 	public static String getFileExt(String fileName) {
-
 		int potPos = fileName.lastIndexOf('.') + 1;
 		String type = fileName.substring(potPos, fileName.length());
 		return type;
 	}
 
-	public static void main(String arg[]) {
+	/**
+	 *<b>功能：</b> 创建父子目录<br>
+	 *<b>作者：</b>孙志强<br>
+	 *<b>日期：</b> 2017年7月1日 下午10:22:25 <br>
+	 * @param parentDir
+	 * @param subDir
+	 * @return
+	 */
+	public static String createDirs(String parentDir, String subDir) {
+		String path = parentDir + subDir;
+		File parentFile = new File(parentDir);
+		if (!parentFile.exists()) {
+			parentFile.mkdirs();
+		}
+		if (parentFile.exists()) {
+			File subFile = new File(path);
+			if (!subFile.exists()) {
+				subFile.mkdirs();
+			}
+		}
+		return path;
+	}
 
+
+	/**
+	 *<b>功能：</b>重命名文件或者文件夹 <br>
+	 *<b>作者：</b>孙志强<br>
+	 *<b>日期：</b> 2017年7月1日 下午10:20:55 <br>
+	 * @param path
+	 * @param oldName
+	 * @param newName
+	 * @throws LzxException
+	 */
+	public static void renameFile(String path, String oldName, String newName) throws LzxException {
+		if (!oldName.equals(newName)) {// 新的文件名和以前文件名不同时,才有必要进行重命名
+			File oldfile = new File(path + File.separator + oldName);
+			File newfile = new File(path + File.separator + newName);
+			if (!oldfile.exists()) {
+				throw new LzxException("重命名文件不存在");
+			}
+			if (newfile.exists()) {// 若在该目录下已经有一个文件和新文件名相同，则不允许重命名
+				throw new LzxException(newName + "已经存在！");
+			} else {
+				oldfile.renameTo(newfile);
+			}
+		} else {
+			throw new LzxException("新文件名和旧文件名相同...");
+		}
+	}
+
+	public static void main(String arg[]) throws IOException {
+		// FileUtil.createDirs("D:\\system\\", "file");
 	}
 
 }

@@ -64,6 +64,9 @@ lzxuni:
         open: false  # 是否开启redis缓存  true开启   false关闭
     shiro:
         redis: false # true表示shiro session存到redis里，需要开启redis，才会生效【分布式场景】
+   #新增文件储存定位
+    attachment:
+        path: E:/
 #mybatis 插件
 mybatis-plus:
   mapper-locations: classpath:mapper/**/*.xml

@@ -73,13 +73,14 @@ public class ZjwdController extends BaseController {
 
     // 新增, 处理
     @RequestMapping("/insert_o.html")
-    public Object insertDo(ZjwdCustom zjwdCustom) throws Exception {
+    public Object insertDo(ZjwdCustom zjwdCustom,String tts) throws Exception {
         System.out.println(zjwdCustom.toString());
+        System.out.println("tts----------"+tts);
         Zjwd demo = new Zjwd();
         demo.setId(UuidUtil.get32UUID());
         demo.setCreatetime(new Date());
-        System.out.println("--------" + zjwdCustom.getWttp());
-        fileBeanService.insertFileBean(zjwdCustom.getWttp(), demo.getId(), "问题图片", "wttp");
+        //fileBeanService.insertFileBean(zjwdCustom.getWttp(), demo.getId(), "问题图片", "wttp");
+        fileBeanService.insertFileBean(tts, demo.getId(), "问题图片", "wttp");
 
         demo.setWttitle(zjwdCustom.getWttitle());
         demo.setWtneirong(zjwdCustom.getWtneirong());

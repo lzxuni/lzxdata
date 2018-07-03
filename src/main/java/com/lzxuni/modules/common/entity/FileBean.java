@@ -1,8 +1,10 @@
 package com.lzxuni.modules.common.entity;
 
+import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.util.Date;
 
-
+@TableName("sys_file")
 public class FileBean {
 	private String id ;
 	private String type ;//一个业务中，区分不同表单字段用，只有一个类型的时候，可为null
