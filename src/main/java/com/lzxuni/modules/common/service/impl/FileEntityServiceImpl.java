@@ -105,7 +105,12 @@ public class FileEntityServiceImpl implements FileEntityService {
 		fileEntityMapper.delete(new EntityWrapper<FileEntity>().eq("yw_id", ywId));
 	}
 
-    // 截取视频图片
+	@Override
+	public FileEntity queryByYwId(FileEntity fileEntity) throws Exception {
+		return fileEntityMapper.selectOne(fileEntity);
+	}
+
+	// 截取视频图片
 	public void ffmpeg(FileEntity fileEntity) throws Exception{
         String veido_path = attachmentConfig.getPath() + fileEntity.getUrlPath();
         String ffmpeg_path = "D:/soft/ffmpeg/ffmpeg.exe";

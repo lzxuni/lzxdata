@@ -26,4 +26,6 @@ public interface FileEntityService {
 	void deleteById(String id);
 	// 根据ywId，批量删除
 	void deleteByYwId(String ywId);
+	//按YWID查询
+	FileEntity queryByYwId(FileEntity fileEntity) throws Exception;
 }

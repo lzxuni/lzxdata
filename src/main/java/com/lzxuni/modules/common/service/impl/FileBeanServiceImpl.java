@@ -12,6 +12,7 @@ import org.apache.http.entity.FileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,8 +50,8 @@ public class FileBeanServiceImpl extends ServiceImpl<FileBeanMapper, FileBean> i
 	}
 
 	@Override
-	public void deleteByYwid(String ywid) {
-
+	public void deleteByYwid(String ywid) throws SQLException {
+		fileBeanMapper.delFileBean(ywid);
 	}
 	@Override
 	public void insertFileBean(String imgjson,String ywid,String type,String ywType) throws Exception {

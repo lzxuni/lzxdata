@@ -4,6 +4,7 @@ package com.lzxuni.modules.common.service;
 import com.baomidou.mybatisplus.service.IService;
 import com.lzxuni.modules.common.entity.FileBean;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface FileBeanService extends IService<FileBean> {
 
 	void update(FileBean fileBean);
 
-	void deleteByYwid(String ywid);
+	void deleteByYwid(String ywid) throws SQLException;
 	//多图插入
 	void insertFileBean(String imgJson,String ywid,String type,String ywType) throws Exception ;
 	//删除部门

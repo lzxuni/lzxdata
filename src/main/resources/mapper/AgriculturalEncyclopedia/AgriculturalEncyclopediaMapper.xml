@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lzxuni.modules.system.mapper.AgriculturalEncyclopedia.AgriculturalEncyclopediaMapper">
-
+<mapper namespace="com.lzxuni.modules.common.mapper.FileBeanMapper">
+    <delete id="deleteByYwid" parameterType="com.lzxuni.modules.common.entity.FileBean">
+        DELETE FROM sys_file WHERE ywId=#{ywId}
+    </delete>
 </mapper>

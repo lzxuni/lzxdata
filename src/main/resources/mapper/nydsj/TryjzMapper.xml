@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.system.mapper.nydsj.TryjzMapper">
+    <select id="findmohuTryjz" resultType="com.lzxuni.modules.system.entity.nydsj.Tryjz" parameterType="com.lzxuni.modules.system.entity.nydsj.Tryjz">
+          SELECT * FROM tbl_nydsj_tryjz WHERE  region LIKE CONCAT(CONCAT('%', #{region}), '%') OR organic LIKE CONCAT(CONCAT('%', #{organic}), '%') OR  ranges LIKE CONCAT(CONCAT('%', #{ranges}), '%')
+    </select>
+    <select id="queryList" resultType="com.lzxuni.modules.system.entity.nydsj.Tryjz" parameterType="com.lzxuni.modules.system.entity.nydsj.Tryjz">
+        SELECT * FROM tbl_nydsj_tryjz
+    </select>
+</mapper>

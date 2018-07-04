@@ -12,4 +12,5 @@ import com.lzxuni.modules.common.entity.FileEntity;
  *@version 1.0
  **/
 public interface FileEntityMapper extends BaseMapper<FileEntity> {
+
 }

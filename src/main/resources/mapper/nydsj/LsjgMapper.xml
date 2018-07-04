@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.system.mapper.nydsj.LsjgMapper">
+    <select id="findmohuLsjg" resultType="com.lzxuni.modules.system.entity.nydsj.Lsjg" parameterType="com.lzxuni.modules.system.entity.nydsj.Lsjg">
+          SELECT * FROM tbl_nydsj_lsjg WHERE  category LIKE CONCAT(CONCAT('%', #{category}), '%') OR price LIKE CONCAT(CONCAT('%', #{price}), '%') OR  years LIKE CONCAT(CONCAT('%', #{years}), '%')
+    </select>
+
+    <select id="queryList" resultType="com.lzxuni.modules.system.entity.nydsj.Lsjg" parameterType="com.lzxuni.modules.system.entity.nydsj.Lsjg">
+          SELECT * FROM tbl_nydsj_lsjg
+    </select>
+</mapper>
