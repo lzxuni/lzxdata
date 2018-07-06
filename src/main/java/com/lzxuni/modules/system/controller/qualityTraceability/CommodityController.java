@@ -7,6 +7,7 @@ import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
+import com.lzxuni.modules.common.service.FileEntityService;
 import com.lzxuni.modules.system.entity.*;
 import com.lzxuni.modules.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class CommodityController extends BaseController {
 
     @Autowired
     private CommodityService commodityService;
-
+    @Autowired
+    private FileEntityService fileEntityService;
     // 列表
     @RequestMapping("/index_v.html")
     public ModelAndView list() {
@@ -60,14 +62,24 @@ public class CommodityController extends BaseController {
     }
     // 新增,修改 处理
     @RequestMapping("/insert_o.html")
-    public Object insertDo(Commodity demo) throws Exception {
-
-        if(StringUtils.isEmpty(demo.getId())){
+    public Object insertDo(Commodity demo,String tts) throws Exception {
+        String ids=demo.getId();
+        if(ids.length()>32){
+            ids=ids.split(",")[0];
+        }else{
+            ids=null;
+        }
+        demo.setId(ids);
+        if(StringUtils.isEmpty(ids)){
             demo.setId(UuidUtil.get32UUID());
             demo.setCreatetime(new Date());
+            fileEntityService.insert(tts,demo.getId(),"商品图片","commoditytp",demo.getCname());
             commodityService.insert(demo);
             return R.ok("新增成功");
         }else{
+            fileEntityService.deleteByYwId(demo.getId());
+            fileEntityService.insert(tts,demo.getId(),"商品图片","commoditytp",demo.getCname());
+
             commodityService.updateById(demo);
             return R.ok("修改成功");
         }
