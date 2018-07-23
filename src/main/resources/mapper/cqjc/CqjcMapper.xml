@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lzxuni.modules.system.mapper.cqjc.CqjcMapper">
     <select id="findmohuCqjc" resultType="com.lzxuni.modules.system.entity.cqjc.Cqjc" parameterType="com.lzxuni.modules.system.entity.cqjc.Cqjc">
-          SELECT * FROM tbl_cqjc WHERE  collection LIKE CONCAT(CONCAT('%', #{collection}), '%') OR insect LIKE CONCAT(CONCAT('%', #{insect}), '%') OR  insectNumber LIKE CONCAT(CONCAT('%', #{insect_Number}), '%') OR  density LIKE CONCAT(CONCAT('%', #{density}), '%') OR  OBservatory LIKE CONCAT(CONCAT('%', #{O_bservatory}), '%') OR  OBservationTime LIKE CONCAT(CONCAT('%', #{O_bservation_time}), '%') OR  photo LIKE CONCAT(CONCAT('%', #{photo}), '%')
+          SELECT * FROM tbl_cqjc WHERE  collection LIKE CONCAT(CONCAT('%', #{collection}), '%') OR insect LIKE CONCAT(CONCAT('%', #{insect}), '%') OR  insect_Number LIKE CONCAT(CONCAT('%', #{insectNumber}), '%') OR  density LIKE CONCAT(CONCAT('%', #{density}), '%') OR  O_bservatory LIKE CONCAT(CONCAT('%', #{oBservatory}), '%') OR  O_bservation_time LIKE CONCAT(CONCAT('%', #{oBservationTime}), '%') OR  photo LIKE CONCAT(CONCAT('%', #{photo}), '%')
     </select>
 
     <select id="queryList" resultType="com.lzxuni.modules.system.entity.cqjc.Cqjc" parameterType="com.lzxuni.modules.system.entity.cqjc.Cqjc">
