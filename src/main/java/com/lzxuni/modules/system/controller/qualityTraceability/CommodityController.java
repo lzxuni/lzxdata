@@ -64,10 +64,15 @@ public class CommodityController extends BaseController {
     @RequestMapping("/insert_o.html")
     public Object insertDo(Commodity demo,String tts) throws Exception {
         String ids=demo.getId();
-        if(ids.length()>32){
+        System.out.println("ids-----------"+ids);
+
+         if(ids.length()>1){
             ids=ids.split(",")[0];
         }else{
             ids=null;
+        }
+        if(tts.length()<10){
+            tts=null;
         }
         demo.setId(ids);
         if(StringUtils.isEmpty(ids)){
