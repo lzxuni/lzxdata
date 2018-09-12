@@ -7,4 +7,7 @@
     <select id="findmohuList" resultType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo" parameterType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo">
        SELECT * FROM tbl_sssp WHERE detailed LIKE '%${detailed}%'
     </select>
+    <select id="findByPhotoId" resultType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo" parameterType="String">
+        SELECT * FROM tbl_sssp WHERE id=#{id}
+    </select>
 </mapper>

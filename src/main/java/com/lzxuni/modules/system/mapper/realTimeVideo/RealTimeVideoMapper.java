@@ -10,4 +10,5 @@ import java.util.List;
 public interface RealTimeVideoMapper extends BaseMapper<RealTimeVideo> {
     List<RealTimeVideo> queryList(RealTimeVideo realTimeVideo);
     List<RealTimeVideo> findmohuList(RealTimeVideo realTimeVideo);
+    RealTimeVideo findByPhotoId(String id);
 }
