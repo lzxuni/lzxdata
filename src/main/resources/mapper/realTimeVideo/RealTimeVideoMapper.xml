@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzxuni.modules.system.mapper.realTimeVideo.RealTimeVideoMapper">
+    <select id="queryList" resultType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo" parameterType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo">
+          SELECT * FROM tbl_sssp
+    </select>
+    <select id="findmohuList" resultType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo" parameterType="com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo">
+       SELECT * FROM tbl_sssp WHERE detailed LIKE '%${detailed}%'
+    </select>
+</mapper>
