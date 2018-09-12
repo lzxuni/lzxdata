@@ -23,4 +23,9 @@ public class RealTimeVIdeoServiceImpl extends ServiceImpl<RealTimeVideoMapper,Re
         PageInfo<RealTimeVideo> PageInfo = new PageInfo<>(realTimeVideoList);
         return PageInfo;
     }
+
+    @Override
+    public RealTimeVideo findByPhotoId(String id) {
+        return realTimeVideoMapper.findByPhotoId(id);
+    }
 }

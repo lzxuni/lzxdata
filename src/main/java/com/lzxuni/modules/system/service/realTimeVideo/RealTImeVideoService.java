@@ -7,5 +7,5 @@ import com.lzxuni.modules.system.entity.realTimeVideo.RealTimeVideo;
 
 public interface RealTImeVideoService extends IService<RealTimeVideo>{
     PageInfo<RealTimeVideo> queryPage(PageParameter pageParameter,RealTimeVideo realTimeVideo);
-
+    RealTimeVideo findByPhotoId(String id);
 }

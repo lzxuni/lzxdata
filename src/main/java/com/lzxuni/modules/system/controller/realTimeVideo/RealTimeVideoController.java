@@ -5,6 +5,7 @@ import com.lzxuni.common.utils.R;
 import com.lzxuni.common.utils.StringUtils;
 import com.lzxuni.common.utils.UuidUtil;
 import com.lzxuni.modules.common.controller.BaseController;
+import com.lzxuni.modules.common.entity.FileEntity;
 import com.lzxuni.modules.common.entity.PageData;
 import com.lzxuni.modules.common.entity.PageParameter;
 import com.lzxuni.modules.common.service.FileEntityService;
@@ -59,6 +60,11 @@ public class RealTimeVideoController extends BaseController{
             realTImeVideoService.insert(realTimeVideo);
             return R.ok("新增成功");
         } else {
+            String id= realTimeVideo.getId();
+            RealTimeVideo realTimeVideo1=realTImeVideoService.findByPhotoId(id);
+            realTimeVideo.setPhotoid(UuidUtil.get32UUID());
+            fileEntityService.deleteByYwId(realTimeVideo1.getPhotoid());
+            fileEntityService.insert(photoid,realTimeVideo.getPhotoid(),"实时视频背景","ssspbjtp","实时视频");
             realTImeVideoService.updateById(realTimeVideo);
             return R.ok("修改成功");
         }
@@ -68,4 +74,5 @@ public class RealTimeVideoController extends BaseController{
         realTImeVideoService.deleteBatchIds(Arrays.asList(roleIds));
         return R.ok("删除成功");
     }
+
 }

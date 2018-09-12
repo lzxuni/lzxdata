@@ -94,7 +94,7 @@
                     selectedRow = null;
                     b.layerForm({
                         id: "Form",
-                        title: "添加视频",
+                        title: "添加位置图片",
                         url: top.$.rootUrl + "${request.contextPath}/realtimevideo/addVideo.html",
                         width: 620,
                         height: 350,
@@ -170,14 +170,6 @@
                         align: "center",
                         formatter: function (e, f) {
                             return '<a  onclick="chakanPhoto(\''+e+'\')"  value="' + e + '">'+"查看"+'</a>' ;
-                        }
-                    },{
-                        label: "视频",
-                        name: "videoid",
-                        width: 200,
-                        align: "center",
-                        formatter: function (e, f) {
-                            return '<a  onclick="chakanVideo(\''+e+'\')"  value="' + e + '">'+"查看"+'</a>' ;
                         }
                     }],
                     isPage: true,
