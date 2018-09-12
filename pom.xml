@@ -349,6 +349,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>lzxdata</finalName>
     </build>
 
 </project>
