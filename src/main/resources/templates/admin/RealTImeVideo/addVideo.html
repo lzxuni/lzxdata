@@ -46,35 +46,19 @@
 <div class="lr-form-wrap" id="form">
     <input id="F_ParentId" type="hidden" />
     <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">采集位置<font face="宋体">*</font></div>
-        <input id="collection" type="text" class="form-control" placeholder="请输入名称" isvalid="yes" checkexpession="NotNull" />
+        <div class="lr-form-item-title">详解<font face="宋体">*</font></div>
+        <input id="detailed" type="text" class="form-control" placeholder="请输入别名" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">虫名<font face="宋体">*</font></div>
-        <input id="insect" type="text" class="form-control" placeholder="请输入别名" isvalid="yes" checkexpession="NotNull" />
-    </div>
-    <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">数量（头）<font face="宋体">*</font></div>
-        <input id="insectNumber" type="text" class="form-control" placeholder="请输入别名" isvalid="yes" checkexpession="NotNull" />
-    </div>
-    <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">密度<font face="宋体">*</font></div>
-        <input id="density" type="text" class="form-control" placeholder="请输入别名" isvalid="yes" checkexpession="NotNull" />
-    </div>
-    <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">观测员<font face="宋体">*</font></div>
-        <input id="oBservatory" type="text" class="form-control" placeholder="请输入别名" isvalid="yes" checkexpession="NotNull" />
-    </div>
-    <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">观测时间<font face="宋体">*</font></div>
-        <input id="oBservationTime" type="text" class="form-control"  onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })"  isvalid="yes"  />
+        <div class="lr-form-item-title">位置图片<font face="宋体">*</font></div>
+        <div id="photo" class="uploader"></div>
+        <input id="photoid" type="hidden" class="form-control"  isvalid="yes"  />
     </div>
 
-
     <div class="col-xs-6 lr-form-item">
-        <div class="lr-form-item-title">图片<font face="宋体">*</font></div>
-            <div id="uploader" class="uploader"></div>
-        <input id="photo" type="hidden" class="form-control"  isvalid="yes"  />
+        <div class="lr-form-item-title">视频<font face="宋体">*</font></div>
+            <div id="video" class="uploader"></div>
+        <input id="videoid" type="hidden" class="form-control"  isvalid="yes"  />
     </div>
 
 
@@ -82,16 +66,16 @@
 </div>
 <script type="text/javascript">
     function duotushangchuan(){
-        var pic=document.getElementsByName("photos");
+        var pic=document.getElementsByName("photoid");
         //alert(pics.length)
         var uu="";
         for(i=0;i<pic.length;i++){
             uu+=pic[i].value+",";
         }
         if(uu==""){
-            $("#photo").val();
+            $("#photoid").val();
         }else{
-        $("#photo").val(uu);}
+        $("#photoid").val(uu);}
     }
 
 </script>
@@ -114,9 +98,9 @@
                 a("#type").lrselectSet("mysql");
                 a("#lr_test").on("click", function() {
 
-                    var collection = a("#collection").val();
-                    if (!collection) {
-                        b.alert.error("请填写采集位置");
+                    var detailed = a("#detailed").val();
+                    if (!detailed) {
+                        b.alert.error("请填写详解");
                         return false
                     }
                     var insect = a("#insect").val();
@@ -163,14 +147,15 @@
             }
         };
         $(".fancybox").fancybox({openEffect:"none",closeEffect:"none"});
-        $("#uploader").powerWebUpload({ auto: true,fileNumLimit:1,type:"image",fileName:"photos" });
+        $("#photo").powerWebUpload({ auto: true,fileNumLimit:1,type:"image",fileName:"photoid" });
+        $("#video").powerWebUpload({ auto: true,fileNumLimit:1,type:"MP4",fileName:"videos" });
         acceptClick = function(e) {
             if (!a("#form").lrValidform()) {
                 return false
             }
 
             var f = a("#form").lrGetFormData(keyValue);
-            a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/cqjc/addDo?id=" + keyValue, f, function(g) {
+            a.lrSaveForm(top.$.rootUrl + "${request.contextPath}/realtimevideo/addVideoDo.html?id=" + keyValue, f, function(g) {
                 if (!!e) {
                     e()
                 }
@@ -2622,6 +2607,7 @@
         });
     })
 </script>
+
 </body>
 
 </html>

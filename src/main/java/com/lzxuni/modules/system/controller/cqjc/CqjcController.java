@@ -70,13 +70,10 @@ public class CqjcController extends BaseController{
             return R.ok("添加成功");
         }else{
             if(cqjc.getPhoto().length()<33){
-                System.out.println("1111111111111111"+cqjc.getPhoto());
                 cqjcService.updateById(cqjc);
             }else{
-                System.out.println("222222222222222222");
               Cqjc cqjc1 =  cqjcService.selectById( cqjc.getId());
                 fileEntityService.deleteByYwId(cqjc1.getPhoto());
-                System.out.println("@@@@@@@@@@@@@@@"+cqjc1.getPhoto());
                 fileEntityService.insert(photo, cqjc1.getPhoto(), "虫情检测", "cqjc","虫情检测");
                 cqjc.setPhoto(cqjc1.getPhoto());
                 cqjcService.updateById(cqjc);
@@ -88,15 +85,11 @@ public class CqjcController extends BaseController{
     public Object del(@RequestParam("keyValue")String[] roleIds) throws SQLException {
         for (int i = 0; i <roleIds.length ; i++) {
             Cqjc cqjc = new Cqjc();
-            System.out.println("@@@@@@"+roleIds[i]);
             if(!roleIds[i].equals("")){
-                System.out.println("1234");
             cqjc =  cqjcService.selectById( roleIds[i]);
                 fileEntityService.deleteByYwId(cqjc.getPhoto());
             }
         }
-
-
         cqjcService.deleteBatchIds(Arrays.asList(roleIds));
         return R.ok("删除成功");
     }
@@ -107,7 +100,6 @@ public class CqjcController extends BaseController{
         FileEntity fileEntity = new FileEntity();
         fileEntity.setYwId(ywId);
         FileEntity fileEntity1 =fileEntityService.queryByYwId(fileEntity);
-        System.out.println("##########"+fileEntity1.getUrlPath());
         String url = fileEntity1.getUrlPath();
         ModelAndView mv = new ModelAndView("admin/Cqjc/chakan");
         mv.addObject("url",url);

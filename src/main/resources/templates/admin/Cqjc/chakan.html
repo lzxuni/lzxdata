@@ -6,10 +6,14 @@
 </head>
 <body>
 
-<img id="img" src="">
+<img id="img" src="" >
 </body>
 </html>
 <script>
     var url="${url}";
-    document.getElementById("img").src="${request.contextPath}/${url}";
+    if(url!=null){
+        document.getElementById("img").src="${request.contextPath}/${url}";}else{
+        document.getElementById("img").innerHTML ="无图片";
+    }
+
 </script>
