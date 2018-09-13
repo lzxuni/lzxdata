@@ -54,7 +54,7 @@ public class AgriculturalEncyclopediaController extends BaseController {
             agriculturalEncyclopedia.setId(UuidUtil.get32UUID());
             Date date = new Date();
             agriculturalEncyclopedia.setCreatetime(date);
-            System.out.println(agriculturalEncyclopedia.getContent());
+            System.out.println("######"+agriculturalEncyclopedia.getContent());
             agriculturalEncyclopediaService.insert(agriculturalEncyclopedia);
             return R.ok("新增成功");
         } else {
