@@ -41,10 +41,10 @@ public class TblCompanyController extends BaseController {
     // 列表
     @RequestMapping("/index_v.html")
     public ModelAndView list() {
-        ModelAndView mv = new ModelAndView("/ht/tblCompany/index");
+        ModelAndView mv = new ModelAndView("/ht/tblcompany/index");
         return mv;
     }
-    // 列表
+    // 列表c
     @RequestMapping("/index_o.html")
     public Object index_o(String pagination,
                           String queryJson) throws Exception{
@@ -59,7 +59,7 @@ public class TblCompanyController extends BaseController {
     // 新增,修改
     @RequestMapping("/insert_v.html")
     public ModelAndView insert() throws Exception{
-        ModelAndView mv = new ModelAndView("/ht/tblCompany/Form");
+        ModelAndView mv = new ModelAndView("/ht/tblcompany/Form");
         return mv;
     }
     // 新增,修改 处理
